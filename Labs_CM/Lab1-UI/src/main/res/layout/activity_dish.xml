@@ -5,13 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="co.edu.udea.compumovil.gr01_20181.labscm20181.views.Dish">
-    <!--android:background="@drawable/background_dish"
-    android:scaleType="centerCrop"-->
 
     <RelativeLayout
         android:id="@+id/register"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="345dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -35,14 +33,14 @@
             android:layout_marginRight="12dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="13dp"
-            android:layout_toLeftOf="@id/name"
+            android:layout_toLeftOf="@id/nameDish"
             android:adjustViewBounds="false"
             android:background="@android:drawable/ic_menu_camera"
             android:cropToPadding="false"
             android:scaleType="centerCrop" />
 
         <EditText
-            android:id="@+id/name"
+            android:id="@+id/nameDish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -90,8 +88,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/linearLayout"
-            android:layout_alignLeft="@+id/name"
-            android:layout_alignStart="@+id/name"
+            android:layout_alignLeft="@+id/nameDish"
+            android:layout_alignStart="@+id/nameDish"
             android:layout_marginBottom="16dp"
             android:ems="10"
             android:hint="@string/priceDish"
@@ -113,7 +111,7 @@
     <RelativeLayout
         android:id="@+id/record"
         android:layout_width="0dp"
-        android:layout_height="115dp"
+        android:layout_height="141dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
