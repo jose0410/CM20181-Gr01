@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dish"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="co.edu.udea.compumovil.gr01_20181.labscm20181.views.Drink">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="333dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/photoDrink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="18dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="15dp"
+            app:srcCompat="@drawable/ic_add_black_48dp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <EditText
+            android:id="@+id/nameDrink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/photoDrink"
+            android:layout_marginLeft="18dp"
+            android:layout_marginStart="18dp"
+            android:layout_toEndOf="@+id/photoDrink"
+            android:layout_toRightOf="@+id/photoDrink"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/nameDrink"
+            tools:layout_editor_absoluteX="194dp"
+            tools:layout_editor_absoluteY="18dp" />
+
+        <EditText
+            android:id="@+id/priceDrink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/nameDrink"
+            android:layout_alignStart="@+id/nameDrink"
+            android:layout_below="@+id/nameDrink"
+            android:layout_marginTop="17dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/priceDrink"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="200dp" />
+
+        <EditText
+            android:id="@+id/ingredientsDrink"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/priceDrink"
+            android:layout_marginTop="34dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/ingredientsDrink"
+            tools:layout_editor_absoluteX="198dp"
+            tools:layout_editor_absoluteY="101dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="0dp"
+        android:layout_height="145dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
