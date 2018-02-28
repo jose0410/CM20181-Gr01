@@ -19,6 +19,8 @@
     <string name="nameDrink">Name</string>
     <string name="priceDrink">Price</string>
     <string name="ingredientsDrink">Ingredients</string>
+    <string name="activityDishName">Dish</string>
+    <string name="activityDrinkName">Drink</string>
 
 
 </resources>

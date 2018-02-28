@@ -44,7 +44,8 @@
             android:layout_alignParentTop="true"
             android:ems="10"
             android:hint="@string/nameDrink"
-            android:inputType="textPersonName"
+            android:inputType="textNoSuggestions|textCapWords"
+            android:imeOptions="actionNext"
             tools:layout_editor_absoluteX="194dp"
             tools:layout_editor_absoluteY="18dp" />
 
@@ -58,7 +59,8 @@
             android:layout_marginTop="17dp"
             android:ems="10"
             android:hint="@string/priceDrink"
-            android:inputType="textPersonName"
+            android:inputType="numberDecimal"
+            android:imeOptions="actionNext"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="200dp" />
 
@@ -72,7 +74,8 @@
             android:layout_marginBottom="25dp"
             android:ems="10"
             android:hint="@string/ingredientsDrink"
-            android:inputType="textPersonName"
+            android:inputType="textCapWords|textNoSuggestions"
+            android:imeOptions="actionDone"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="161dp" />
 
