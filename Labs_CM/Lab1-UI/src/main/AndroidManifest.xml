@@ -24,7 +24,8 @@
         </activity>
         <activity
             android:name=".views.Dish"
-            android:parentActivityName=".views.MainActivity">
+            android:parentActivityName=".views.MainActivity"
+            android:windowSoftInputMode="adjustResize">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
@@ -33,7 +34,8 @@
         </activity>
         <activity
             android:name=".views.Drink"
-            android:parentActivityName=".views.MainActivity">
+            android:parentActivityName=".views.MainActivity"
+            android:windowSoftInputMode="adjustResize">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
