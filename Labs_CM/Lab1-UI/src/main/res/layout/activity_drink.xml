@@ -27,7 +27,7 @@
         app:layout_constraintBottom_toTopOf="@+id/drinkRecord"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_drink">
 
         <ImageView
             android:id="@+id/photoDrink"
@@ -53,8 +53,8 @@
             android:layout_alignParentTop="true"
             android:ems="10"
             android:hint="@string/nameDrink"
-            android:inputType="textNoSuggestions|textCapWords"
             android:imeOptions="actionNext"
+            android:inputType="textNoSuggestions|textCapWords"
             tools:layout_editor_absoluteX="194dp"
             tools:layout_editor_absoluteY="18dp" />
 
@@ -68,8 +68,8 @@
             android:layout_marginTop="17dp"
             android:ems="10"
             android:hint="@string/priceDrink"
-            android:inputType="numberDecimal"
             android:imeOptions="actionNext"
+            android:inputType="numberDecimal"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="200dp" />
 
@@ -83,8 +83,8 @@
             android:layout_marginBottom="25dp"
             android:ems="10"
             android:hint="@string/ingredientsDrink"
-            android:inputType="textCapWords|textNoSuggestions"
             android:imeOptions="actionDone"
+            android:inputType="textCapWords|textNoSuggestions"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="161dp" />
 

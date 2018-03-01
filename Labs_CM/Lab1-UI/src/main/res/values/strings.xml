@@ -22,6 +22,7 @@
     <string name="activityDishName">Dish</string>
     <string name="activityDrinkName">Drink</string>
     <string name="tagSchedule">Schedule</string>
+    <string name="change">Change</string>
 
 
 </resources>

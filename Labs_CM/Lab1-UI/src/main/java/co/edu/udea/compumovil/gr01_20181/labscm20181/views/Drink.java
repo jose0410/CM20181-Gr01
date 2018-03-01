@@ -29,7 +29,7 @@ public class Drink extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.exit:
+            case R.id.exit_o:
                 finish();
                 break;
         }

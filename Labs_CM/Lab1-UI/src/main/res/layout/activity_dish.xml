@@ -23,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_dish">
 
         <ImageView
             android:id="@+id/photo"
@@ -136,6 +136,13 @@
                 android:text="@string/evening" />
 
         </LinearLayout>
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/change"
+            android:onClick="showTimePickerDialog"
+            android:textSize="20sp"/>
 
     </RelativeLayout>
 

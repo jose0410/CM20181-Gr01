@@ -1,5 +1,6 @@
 package co.edu.udea.compumovil.gr01_20181.labscm20181.views;
 
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -34,10 +35,15 @@ public class Dish extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.exit:
+            case R.id.exit_o:
                 finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void showTimePickerDialog(View view) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 }
