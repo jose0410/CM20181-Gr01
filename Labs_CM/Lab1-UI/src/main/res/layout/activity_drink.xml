@@ -31,63 +31,83 @@
 
         <ImageView
             android:id="@+id/photoDrink"
-            android:layout_width="match_parent"
+            android:layout_width="142dp"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="190dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_toLeftOf="@+id/nameDrink"
-            android:layout_toStartOf="@+id/nameDrink"
             android:background="@android:drawable/ic_menu_camera"
+            android:onClick="onImageGalleryClicked"
             android:scaleType="centerCrop"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="16dp"
-            android:onClick="onImageGalleryClicked"/>
+            tools:layout_editor_absoluteY="16dp" />
 
-        <EditText
-            android:id="@+id/nameDrink"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/nameDrinkContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:ems="10"
-            android:hint="@string/nameDrink"
-            android:imeOptions="actionNext"
-            android:inputType="textNoSuggestions|textCapWords"
-            tools:layout_editor_absoluteX="194dp"
-            tools:layout_editor_absoluteY="18dp" />
+            android:layout_alignParentTop="true">
 
-        <EditText
-            android:id="@+id/priceDrink"
+            <EditText
+                android:id="@+id/nameDrink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/nameDrink"
+                android:imeOptions="actionNext"
+                android:inputType="textNoSuggestions|textCapWords"
+                tools:layout_editor_absoluteX="194dp"
+                tools:layout_editor_absoluteY="18dp" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/priceDrinkContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/nameDrink"
-            android:layout_alignStart="@+id/nameDrink"
-            android:layout_below="@+id/nameDrink"
-            android:layout_marginTop="17dp"
-            android:ems="10"
-            android:hint="@string/priceDrink"
-            android:imeOptions="actionNext"
-            android:inputType="numberDecimal"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="200dp" />
+            android:layout_alignLeft="@+id/nameDrinkContainer"
+            android:layout_alignStart="@+id/nameDrinkContainer"
+            android:layout_below="@+id/nameDrinkContainer">
 
-        <EditText
-            android:id="@+id/ingredientsDrink"
+            <EditText
+                android:id="@+id/priceDrink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:ems="10"
+                android:hint="@string/priceDrink"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="200dp" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="25dp"
-            android:ems="10"
-            android:hint="@string/ingredientsDrink"
-            android:imeOptions="actionDone"
-            android:inputType="textCapWords|textNoSuggestions"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="161dp" />
+            android:layout_below="@+id/priceDrinkContainer"
+            android:layout_marginTop="68dp">
+
+            <EditText
+                android:id="@+id/ingredientsDrink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/ingredientsDrink"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords|textNoSuggestions"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="161dp" />
+        </android.support.design.widget.TextInputLayout>
+
 
     </RelativeLayout>
 
