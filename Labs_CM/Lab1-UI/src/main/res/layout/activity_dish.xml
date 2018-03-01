@@ -36,7 +36,7 @@
             android:layout_marginTop="13dp"
             android:layout_weight="1"
             android:adjustViewBounds="false"
-            android:background="@android:drawable/ic_menu_camera"
+            app:srcCompat="@drawable/ic_if_linkedin_ui_10_2335594"
             android:cropToPadding="false"
             android:scaleType="centerCrop"
             android:onClick="onImageGalleryClicked"/>
@@ -160,14 +160,14 @@
             android:id="@+id/label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/time"
-            android:layout_alignStart="@+id/time"
+            android:layout_alignLeft="@+id/duration"
+            android:layout_alignStart="@+id/duration"
             android:layout_alignTop="@+id/checkboxSchedule"
             android:text="@string/tagDuration"
             android:textAlignment="inherit" />
 
         <TextView
-            android:id="@+id/time"
+            android:id="@+id/duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -177,7 +177,7 @@
             android:layout_marginRight="75dp"
             android:layout_marginTop="13dp"
             android:hint="@string/change"
-            android:onClick="showTimePickerDialog"
+            android:onClick="showPickerDialog"
             android:textSize="20sp" />
 
     </RelativeLayout>

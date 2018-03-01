@@ -171,7 +171,7 @@
             android:textAlignment="inherit" />
 
         <TextView
-            android:id="@+id/time"
+            android:id="@+id/duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/label"
@@ -179,7 +179,7 @@
             android:layout_below="@+id/label"
             android:layout_marginTop="16dp"
             android:hint="@string/change"
-            android:onClick="showTimePickerDialog"
+            android:onClick="showPickerDialog"
             android:textSize="20sp" />
 
     </RelativeLayout>

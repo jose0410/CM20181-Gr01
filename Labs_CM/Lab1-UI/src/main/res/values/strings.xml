@@ -24,6 +24,7 @@
     <string name="tagSchedule">Schedule</string>
     <string name="change">Change</string>
     <string name="tagDuration">Duration</string>
+    <string name="duration">Time of preparation</string>
 
 
 </resources>

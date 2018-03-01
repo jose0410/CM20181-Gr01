@@ -5,15 +5,24 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.NumberPicker;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.view.LayoutInflater;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,19 +33,35 @@ import co.edu.udea.compumovil.gr01_20181.labscm20181.R;
 public class Dish extends AppCompatActivity {
 
     public static final int IMAGE_GALLERY_REQUEST = 20;
-    private ImageView addPhoto;
+    private ImageView photoImageView;
+    private Toolbar myToolbar;
+    private EditText nameDishEditText;
+    private EditText priceDishEditText;
+    private EditText ingredientsDishEditText;
+    private TextView durationTextView;
+    private CheckBox morningCheckBox;
+    private CheckBox afternoonCheckBox;
+    private CheckBox eveningCheckBox;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dish);
-
-        Toolbar myToolbar = findViewById(R.id.toolbar_dish);
+        myToolbar = findViewById(R.id.toolbar_dish);
+        nameDishEditText = findViewById(R.id.nameDish);
+        priceDishEditText = findViewById(R.id.price);
+        ingredientsDishEditText = findViewById(R.id.ingredients);
+        durationTextView = findViewById(R.id.duration);
+        morningCheckBox = findViewById(R.id.morningCheckBox);
+        afternoonCheckBox = findViewById(R.id.afternoonCheckBox);
+        eveningCheckBox = findViewById(R.id.eveningCheckBox);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        addPhoto = findViewById(R.id.photo);
+        photoImageView = findViewById(R.id.photo);
     }
 
     public void onCheckboxClicked(View view) {
@@ -50,17 +75,85 @@ public class Dish extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.exit_o:
                 finish();
+                break;
+            case R.id.clean:
+                photoImageView.setImageResource(R.drawable.ic_if_linkedin_ui_10_2335594);
+                nameDishEditText.setText("");
+                priceDishEditText.setText("");
+                ingredientsDishEditText.setText("");
+                durationTextView.setText("");
+                morningCheckBox.setChecked(false);
+                afternoonCheckBox.setChecked(false);
+                eveningCheckBox.setChecked(false);
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void showTimePickerDialog(View view) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "timePicker");
+    public void showPickerDialog(View view) {
+        LayoutInflater l = getLayoutInflater();
+        final View v = l.inflate(R.layout.picker_layout, null);
+        final FrameLayout layout = new FrameLayout(this);
+        layout.addView(v, new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                Gravity.CENTER));
+        NumberPicker numberPicker = v.findViewById(R.id.minute_picker);
+        numberPicker.setMaxValue(60);
+        numberPicker.setMinValue(0);
+        numberPicker.setFormatter(new NumberPicker.Formatter() {
+            @Override
+            public String format(int i) {
+                return String.format("%02d", i);
+            }
+        });
+        numberPicker = v.findViewById(R.id.second_picker);
+        numberPicker.setMaxValue(60);
+        numberPicker.setMinValue(0);
+        numberPicker.setFormatter(new NumberPicker.Formatter() {
+            @Override
+            public String format(int i) {
+                return String.format("%02d", i);
+            }
+        });
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle(R.string.duration);
+        alertDialogBuilder.setView(layout);
+        final NumberPicker minutePicker = v.findViewById(R.id.minute_picker);
+        final NumberPicker secondPicker = numberPicker;
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("Ok",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int id) {
+                                String minute = String.valueOf(minutePicker.getValue());
+                                String second = String.valueOf(secondPicker.getValue());
+                                if (minute.length() == 1) {
+                                    minute = "0" + minute;
+                                }
+                                if (second.length() == 1) {
+                                    second = "0" + second;
+                                }
+                                TextView tv = (TextView) findViewById(R.id.duration);
+                                tv.setText(minute + ":" + second + " min");
+
+                            }
+                        })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int id) {
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
+
     }
 
     public void onImageGalleryClicked(View view) {
@@ -102,7 +195,7 @@ public class Dish extends AppCompatActivity {
 
 
                     // show the image to the user
-                    addPhoto.setImageBitmap(image);
+                    photoImageView.setImageBitmap(image);
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
