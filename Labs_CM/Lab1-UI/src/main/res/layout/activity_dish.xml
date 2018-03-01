@@ -58,8 +58,7 @@
                 android:ems="10"
                 android:hint="@string/nameDish"
                 android:imeOptions="actionNext"
-                android:inputType="textCapWords|textNoSuggestions"
-                android:text="@string/nameDish" />
+                android:inputType="textCapWords|textNoSuggestions" />
 
             <EditText
                 android:id="@+id/price"
@@ -107,6 +106,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
             android:orientation="vertical">
 
             <com.github.clans.fab.Label
@@ -138,15 +138,26 @@
 
         </LinearLayout>
 
+        <com.github.clans.fab.Label
+            android:id="@+id/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/time"
+            android:layout_alignStart="@+id/time"
+            android:layout_alignTop="@+id/checkboxSchedule"
+            android:text="@string/tagDuration"
+            android:textAlignment="inherit" />
+
         <TextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/checkboxSchedule"
-            android:layout_marginLeft="73dp"
-            android:layout_marginStart="73dp"
-            android:layout_toEndOf="@+id/checkboxSchedule"
-            android:layout_toRightOf="@+id/checkboxSchedule"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/label"
+            android:layout_marginEnd="75dp"
+            android:layout_marginRight="75dp"
+            android:layout_marginTop="13dp"
             android:hint="@string/change"
             android:onClick="showTimePickerDialog"
             android:textSize="20sp" />

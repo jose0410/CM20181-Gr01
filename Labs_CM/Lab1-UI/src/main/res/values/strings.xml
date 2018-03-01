@@ -23,6 +23,7 @@
     <string name="activityDrinkName">Drink</string>
     <string name="tagSchedule">Schedule</string>
     <string name="change">Change</string>
+    <string name="tagDuration">Duration</string>
 
 
 </resources>
