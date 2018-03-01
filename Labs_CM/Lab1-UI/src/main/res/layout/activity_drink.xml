@@ -42,7 +42,8 @@
             android:background="@android:drawable/ic_menu_camera"
             android:scaleType="centerCrop"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="16dp" />
+            tools:layout_editor_absoluteY="16dp"
+            android:onClick="onImageGalleryClicked"/>
 
         <EditText
             android:id="@+id/nameDrink"

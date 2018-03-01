@@ -39,7 +39,7 @@
             android:name=".views.Drink"
             android:label="@string/activityDrinkName"
             android:parentActivityName=".views.MainActivity"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustPan">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
