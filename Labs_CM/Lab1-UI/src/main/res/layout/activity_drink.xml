@@ -7,6 +7,15 @@
     android:layout_height="wrap_content"
     tools:context="co.edu.udea.compumovil.gr01_20181.labscm20181.views.Drink">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_drink"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
     <RelativeLayout
         android:id="@+id/registerDrink"
         android:layout_width="0dp"
