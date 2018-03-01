@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -23,7 +24,10 @@ import co.edu.udea.compumovil.gr01_20181.labscm20181.R;
 public class Drink extends AppCompatActivity {
 
     public static final int IMAGE_GALLERY_REQUEST = 20;
-    private ImageView addPhotoDrink;
+    private ImageView photoDrinkImageView;
+    private EditText nameDrink;
+    private EditText priceDrinkEditText;
+    private EditText ingredientsDrinkEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,10 @@ public class Drink extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        addPhotoDrink = findViewById(R.id.photoDrink);
+        photoDrinkImageView = findViewById(R.id.photoDrink);
+        nameDrink = findViewById(R.id.nameDrink);
+        priceDrinkEditText = findViewById(R.id.priceDrink);
+        ingredientsDrinkEditText = findViewById(R.id.ingredientsDrink);
     }
 
     @Override
@@ -49,6 +56,12 @@ public class Drink extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.exit_o:
                 finish();
+                break;
+            case R.id.clean:
+                photoDrinkImageView.setImageResource(R.drawable.ic_camera);
+                nameDrink.setText("");
+                priceDrinkEditText.setText("");
+                ingredientsDrinkEditText.setText("");
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -93,7 +106,7 @@ public class Drink extends AppCompatActivity {
 
 
                     // show the image to the user
-                    addPhotoDrink.setImageBitmap(image);
+                    photoDrinkImageView.setImageBitmap(image);
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();

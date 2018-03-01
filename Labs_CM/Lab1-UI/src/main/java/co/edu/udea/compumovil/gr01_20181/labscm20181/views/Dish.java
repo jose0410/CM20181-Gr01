@@ -80,7 +80,7 @@ public class Dish extends AppCompatActivity {
                 finish();
                 break;
             case R.id.clean:
-                photoImageView.setImageResource(R.drawable.ic_if_linkedin_ui_10_2335594);
+                photoImageView.setImageResource(R.drawable.ic_camera);
                 nameDishEditText.setText("");
                 priceDishEditText.setText("");
                 ingredientsDishEditText.setText("");

@@ -36,7 +36,7 @@
             android:layout_marginTop="13dp"
             android:layout_weight="1"
             android:adjustViewBounds="false"
-            app:srcCompat="@drawable/ic_if_linkedin_ui_10_2335594"
+            app:srcCompat="@drawable/ic_camera"
             android:cropToPadding="false"
             android:scaleType="centerCrop"
             android:onClick="onImageGalleryClicked"/>
