@@ -9,10 +9,10 @@
     <LinearLayout
         android:id="@+id/mainInfo"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="132dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -67,17 +67,16 @@
     <RelativeLayout
         android:id="@+id/register"
         android:layout_width="0dp"
-        android:layout_height="232dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="206dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         app:layout_constraintBottom_toTopOf="@+id/record"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toBottomOf="@+id/mainInfo"
+        app:layout_constraintVertical_bias="0.0">
 
         <EditText
             android:id="@+id/ingredients"
@@ -92,7 +91,7 @@
             android:inputType="textCapWords|textNoSuggestions" />
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/checkboxSchedule"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -134,11 +133,11 @@
     <RelativeLayout
         android:id="@+id/record"
         android:layout_width="0dp"
-        android:layout_height="141dp"
+        android:layout_height="158dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/mainInfo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
