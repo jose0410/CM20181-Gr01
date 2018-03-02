@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -37,7 +38,7 @@ import java.io.InputStream;
 
 import co.edu.udea.compumovil.gr01_20181.labscm20181.R;
 
-public class Dish extends AppCompatActivity {
+public class Dish extends AppCompatActivity implements View.OnClickListener{
 
     public static final int IMAGE_GALLERY_REQUEST = 20;
     private ImageView photoImageView, imageLoad;
@@ -51,7 +52,6 @@ public class Dish extends AppCompatActivity {
     private CheckBox afternoonCheckBox;
     private CheckBox eveningCheckBox;
     private Button save;
-    View.OnClickListener listener;
     private Uri imageUri;
     private Bitmap bitmap;
     private String uploadName = "",uploadIngredients, uploadSchedule, uploadDuration, uploadImage;
@@ -79,34 +79,39 @@ public class Dish extends AppCompatActivity {
 
         save = findViewById(R.id.savebtn);
 
+        save.setOnClickListener(this);
+
         nameLoad = findViewById(R.id.nameLoad);
         priceLoad = findViewById(R.id.priceLoad);
+        ingredientsLoad = findViewById(R.id.ingredientsLoad);
+        imageLoad = findViewById(R.id.imageLoad);
 
         loadData();
         nameLoad.setText(uploadName);
         priceLoad.setText(String.valueOf(uploadPrice));
-
+        ingredientsLoad.setText(uploadIngredients);
+        imageLoad.setImageBitmap(decodeBase64(uploadImage));
     }
 
-    public void buttonClick(){
-        listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (view.getId() == R.id.savebtn) {
-                    uploadName = nameDishEditText.getText().toString();
-                    uploadPrice = Integer.parseInt(priceDishEditText.getText().toString());
-                    saveData();
-                }
-            }
-        };
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.savebtn) {
+            uploadName = nameDishEditText.getText().toString();
+            uploadPrice = Integer.parseInt(priceDishEditText.getText().toString());
+            uploadIngredients = ingredientsDishEditText.getText().toString();
+            uploadImage = encodeToBase64(bitmap);
+            saveData();
+        }
     }
-
 
     public void saveData(){
         SharedPreferences prefer = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = prefer.edit();
         editor.putString("Name",uploadName);
         editor.putInt("Price",uploadPrice);
+        editor.putString("Ingredients",uploadIngredients);
+        editor.putString("Photo",uploadImage);
+
         editor.apply();
     }
 
@@ -115,6 +120,9 @@ public class Dish extends AppCompatActivity {
         SharedPreferences.Editor editor = prefer.edit();
         uploadName = prefer.getString("Name","");
         uploadPrice = prefer.getInt("Price",0);
+        uploadIngredients = prefer.getString("Ingredients","");
+        uploadImage = prefer.getString("Photo","");
+
         editor.apply();
     }
 
@@ -300,6 +308,8 @@ public class Dish extends AppCompatActivity {
                     // show the image to the user
                     photoImageView.setImageBitmap(image);
 
+                    bitmap = image;
+
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                     // show a message to the user indictating that the image is unavailable.
@@ -309,4 +319,5 @@ public class Dish extends AppCompatActivity {
             }
         }
     }
+
 }
