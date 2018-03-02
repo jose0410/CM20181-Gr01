@@ -1,24 +1,27 @@
 package co.edu.udea.compumovil.gr01_20181.labscm20181.views;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.FrameLayout;
-import android.widget.RadioButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.NumberPicker;
@@ -27,6 +30,7 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -36,16 +40,22 @@ import co.edu.udea.compumovil.gr01_20181.labscm20181.R;
 public class Dish extends AppCompatActivity {
 
     public static final int IMAGE_GALLERY_REQUEST = 20;
-    private ImageView photoImageView;
+    private ImageView photoImageView, imageLoad;
     private Toolbar myToolbar;
     private EditText nameDishEditText;
     private EditText priceDishEditText;
     private EditText ingredientsDishEditText;
     private TextView durationTextView;
+    private TextView nameLoad,priceLoad,scheduleLoad,ingredientsLoad,durationLoad;
     private CheckBox morningCheckBox;
     private CheckBox afternoonCheckBox;
     private CheckBox eveningCheckBox;
-    Uri imageUri;
+    private Button save;
+    View.OnClickListener listener;
+    private Uri imageUri;
+    private Bitmap bitmap;
+    private String uploadName = "",uploadIngredients, uploadSchedule, uploadDuration, uploadImage;
+    private int uploadPrice = 0;
 
 
     @Override
@@ -66,6 +76,63 @@ public class Dish extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         photoImageView = findViewById(R.id.photo);
+
+        save = findViewById(R.id.savebtn);
+
+        nameLoad = findViewById(R.id.nameLoad);
+        priceLoad = findViewById(R.id.priceLoad);
+
+        loadData();
+        nameLoad.setText(uploadName);
+        priceLoad.setText(String.valueOf(uploadPrice));
+
+    }
+
+    public void buttonClick(){
+        listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (view.getId() == R.id.savebtn) {
+                    uploadName = nameDishEditText.getText().toString();
+                    uploadPrice = Integer.parseInt(priceDishEditText.getText().toString());
+                    saveData();
+                }
+            }
+        };
+    }
+
+
+    public void saveData(){
+        SharedPreferences prefer = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = prefer.edit();
+        editor.putString("Name",uploadName);
+        editor.putInt("Price",uploadPrice);
+        editor.apply();
+    }
+
+    public void loadData(){
+        SharedPreferences prefer = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = prefer.edit();
+        uploadName = prefer.getString("Name","");
+        uploadPrice = prefer.getInt("Price",0);
+        editor.apply();
+    }
+
+    public static String encodeToBase64(Bitmap image) {
+        Bitmap immage = image;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        immage.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+
+        Log.d("Image Log:", imageEncoded);
+        return imageEncoded;
+    }
+
+    public static Bitmap decodeBase64(String input) {
+        byte[] decodedByte = Base64.decode(input, 0);
+        return BitmapFactory
+                .decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 
     public void onCheckboxClicked(View view) {
@@ -217,8 +284,6 @@ public class Dish extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             // if we are here, everything processed successfully.
             if (requestCode == IMAGE_GALLERY_REQUEST) {
-                // if we are here, we are hearing back from the image gallery.
-
                 // the address of the image on the SD Card.
                 imageUri = data.getData();
 
@@ -231,7 +296,6 @@ public class Dish extends AppCompatActivity {
 
                     // get a bitmap from the stream.
                     Bitmap image = BitmapFactory.decodeStream(inputStream);
-
 
                     // show the image to the user
                     photoImageView.setImageBitmap(image);
