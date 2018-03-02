@@ -100,6 +100,7 @@ public class Dish extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.savebtn) {
+            uploadSchedule = "";
             uploadName = nameDishEditText.getText().toString();
             uploadPrice = Integer.parseInt(priceDishEditText.getText().toString());
             uploadIngredients = ingredientsDishEditText.getText().toString();
@@ -116,7 +117,24 @@ public class Dish extends AppCompatActivity implements View.OnClickListener{
             if (eveningCheckBox.isChecked())
                 uploadSchedule = uploadSchedule + eveningCheckBox.getText().toString();
 
+            nameLoad.setText(uploadName);
+            priceLoad.setText(String.valueOf(uploadPrice));
+            ingredientsLoad.setText(uploadIngredients);
+            imageLoad.setImageBitmap(decodeBase64(uploadImage));
+            scheduleLoad.setText(uploadSchedule);
+
+            photoImageView.setImageResource(R.drawable.ic_camera);
+            nameDishEditText.setText("");
+            priceDishEditText.setText("");
+            ingredientsDishEditText.setText("");
+            durationTextView.setText("");
+            morningCheckBox.setChecked(false);
+            afternoonCheckBox.setChecked(false);
+            eveningCheckBox.setChecked(false);
+
             saveData();
+
+
         }
     }
 
