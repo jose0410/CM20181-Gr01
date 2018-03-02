@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CHEF BURGER</string>
+    <string name="header_description">Chef Burger</string>
+    <string name="about">El 8 de Agosto nace CHEF BURGER COMPANY. Nuestro Objetivo es: ¡El Amor por las Hamburguesas!</string>
+    <string name="title_activity_menu">Menú</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_dashboard">Tablero</string>
+    <string name="title_notifications">Notificaciones</string>
+    <string name="addDish">Agregar Plato</string>
+    <string name="addDrink">Agregar Bebida</string>
+    <string name="title_activity_dish">Plato</string>
+    <string name="title_activity_drink">Bebida</string>
+    <string name="evening">Noche</string>
+    <string name="afternoon">Tarde</string>
+    <string name="morning">Mañana</string>
+    <string name="nameDish">Nombre</string>
+    <string name="priceDish">Precio</string>
+    <string name="ingredientsDish">Ingredientes</string>
+    <string name="nameDrink">Nombre</string>
+    <string name="priceDrink">Precio</string>
+    <string name="ingredientsDrink">Ingredientes</string>
+    <string name="activityDishName">Plato</string>
+    <string name="activityDrinkName">Bebida</string>
+    <string name="tagSchedule">Horario</string>
+    <string name="change">Cambiar</string>
+    <string name="tagDuration">Duracion</string>
+    <string name="duration">Tiempo de Preparación</string>
+    <string name="save">Guardar</string>
+</resources>
