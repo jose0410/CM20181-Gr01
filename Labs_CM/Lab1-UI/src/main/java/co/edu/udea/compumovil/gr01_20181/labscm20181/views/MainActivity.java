@@ -55,17 +55,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         Intent intent;
+        Bundle bun = new Bundle();
         switch(view.getId()){
             case R.id.addDish:
                 intent = new Intent(this,Dish.class);
+                onSaveInstanceState(bun);
+                intent.putExtras(bun);
                 startActivity(intent);
                 break;
             case R.id.addDrink:
                 intent = new Intent(this,Drink.class);
+                onSaveInstanceState(bun);
+                intent.putExtras(bun);
                 startActivity(intent);
                 break;
         }
     }
+
 
 
 }

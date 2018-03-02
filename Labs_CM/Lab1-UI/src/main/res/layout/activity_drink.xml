@@ -37,7 +37,7 @@
             android:layout_marginBottom="190dp"
             app:srcCompat="@drawable/ic_camera"
             android:onClick="onImageGalleryClicked"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="16dp" />
 

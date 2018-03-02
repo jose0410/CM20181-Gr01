@@ -28,18 +28,18 @@
         <ImageView
             android:id="@+id/photo"
             android:layout_width="148dp"
-            android:layout_height="96dp"
+            android:layout_height="match_parent"
             android:layout_marginEnd="12dp"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="13dp"
             android:layout_weight="1"
+            android:scaleType="fitCenter"
             android:adjustViewBounds="false"
-            app:srcCompat="@drawable/ic_camera"
             android:cropToPadding="false"
-            android:scaleType="centerCrop"
-            android:onClick="onImageGalleryClicked"/>
+            android:onClick="onImageGalleryClicked"
+            app:srcCompat="@drawable/ic_camera" />
 
         <LinearLayout
             android:id="@+id/infoDish"

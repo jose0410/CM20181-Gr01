@@ -3,6 +3,7 @@ package co.edu.udea.compumovil.gr01_20181.labscm20181.views;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.FrameLayout;
+import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.NumberPicker;
@@ -42,6 +45,7 @@ public class Dish extends AppCompatActivity {
     private CheckBox morningCheckBox;
     private CheckBox afternoonCheckBox;
     private CheckBox eveningCheckBox;
+    Uri imageUri;
 
 
     @Override
@@ -88,9 +92,44 @@ public class Dish extends AppCompatActivity {
                 morningCheckBox.setChecked(false);
                 afternoonCheckBox.setChecked(false);
                 eveningCheckBox.setChecked(false);
+                imageUri = null;
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+
+        if (imageUri !=null) {
+            savedInstanceState.putParcelable("photo", imageUri);
+        }
+
+
+        savedInstanceState.putString("nameDish", nameDishEditText.getText().toString());
+        savedInstanceState.putString("priceDish", priceDishEditText.getText().toString());
+        savedInstanceState.putString("ingredientsDish", ingredientsDishEditText.getText().toString());
+        savedInstanceState.putString("duration", durationTextView.getText().toString());
+        savedInstanceState.putBoolean("morning", morningCheckBox.isChecked());
+        savedInstanceState.putBoolean("afternoon", afternoonCheckBox.isChecked());
+        savedInstanceState.putBoolean("evening", eveningCheckBox.isChecked());
+
+    }
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+
+        nameDishEditText.setText(savedInstanceState.getString("nameDish"));
+        priceDishEditText.setText(savedInstanceState.getString("priceDish"));
+        ingredientsDishEditText.setText(savedInstanceState.getString("ingredientsDish"));
+        durationTextView.setText(savedInstanceState.getString("duration"));
+        morningCheckBox.setChecked(savedInstanceState.getBoolean("morning"));
+        afternoonCheckBox.setChecked(savedInstanceState.getBoolean("afternoon"));
+        eveningCheckBox.setChecked(savedInstanceState.getBoolean("evening"));
+        imageUri = (Uri) savedInstanceState.getParcelable("photo");
+        if (imageUri !=null) {
+            photoImageView.setImageURI(imageUri);
+        }
     }
 
     public void showPickerDialog(View view) {
@@ -181,7 +220,7 @@ public class Dish extends AppCompatActivity {
                 // if we are here, we are hearing back from the image gallery.
 
                 // the address of the image on the SD Card.
-                Uri imageUri = data.getData();
+                imageUri = data.getData();
 
                 // declare a stream to read the image data from the SD Card.
                 InputStream inputStream;

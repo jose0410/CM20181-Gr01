@@ -25,9 +25,10 @@ public class Drink extends AppCompatActivity {
 
     public static final int IMAGE_GALLERY_REQUEST = 20;
     private ImageView photoDrinkImageView;
-    private EditText nameDrink;
+    private EditText nameDrinkEditText;
     private EditText priceDrinkEditText;
     private EditText ingredientsDrinkEditText;
+    Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class Drink extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         photoDrinkImageView = findViewById(R.id.photoDrink);
-        nameDrink = findViewById(R.id.nameDrink);
+        nameDrinkEditText = findViewById(R.id.nameDrink);
         priceDrinkEditText = findViewById(R.id.priceDrink);
         ingredientsDrinkEditText = findViewById(R.id.ingredientsDrink);
     }
@@ -59,12 +60,41 @@ public class Drink extends AppCompatActivity {
                 break;
             case R.id.clean:
                 photoDrinkImageView.setImageResource(R.drawable.ic_camera);
-                nameDrink.setText("");
+                nameDrinkEditText.setText("");
                 priceDrinkEditText.setText("");
                 ingredientsDrinkEditText.setText("");
+                imageUri = null;
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+
+        if (imageUri !=null) {
+            savedInstanceState.putParcelable("photo", imageUri);
+        }
+
+
+        savedInstanceState.putString("nameDish", nameDrinkEditText.getText().toString());
+        savedInstanceState.putString("priceDish", priceDrinkEditText.getText().toString());
+        savedInstanceState.putString("ingredientsDish", ingredientsDrinkEditText.getText().toString());
+
+
+    }
+
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+
+        nameDrinkEditText.setText(savedInstanceState.getString("nameDish"));
+        priceDrinkEditText.setText(savedInstanceState.getString("priceDish"));
+        ingredientsDrinkEditText.setText(savedInstanceState.getString("ingredientsDish"));
+        imageUri = (Uri) savedInstanceState.getParcelable("photo");
+        if (imageUri !=null) {
+            photoDrinkImageView.setImageURI(imageUri);
+        }
     }
 
     public void onImageGalleryClicked(View view) {
@@ -92,7 +122,7 @@ public class Drink extends AppCompatActivity {
                 // if we are here, we are hearing back from the image gallery.
 
                 // the address of the image on the SD Card.
-                Uri imageUri = data.getData();
+                imageUri = data.getData();
 
                 // declare a stream to read the image data from the SD Card.
                 InputStream inputStream;
