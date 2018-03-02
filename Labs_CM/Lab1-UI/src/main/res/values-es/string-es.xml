@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">CHEF BURGER</string>
+<resources><string name="app_name">CHEF BURGER</string>
     <string name="header_description">Chef Burger</string>
     <string name="about">El 8 de Agosto nace CHEF BURGER COMPANY. Nuestro Objetivo es: ¡El Amor por las Hamburguesas!</string>
     <string name="title_activity_menu">Menú</string>
