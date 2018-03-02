@@ -63,6 +63,7 @@ public class Dish extends AppCompatActivity implements View.OnClickListener{
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dish);
+        imageUri =  null;
         myToolbar = findViewById(R.id.toolbar_dish);
         nameDishEditText = findViewById(R.id.nameDish);
         priceDishEditText = findViewById(R.id.price);
@@ -99,7 +100,7 @@ public class Dish extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.savebtn) {
+        if (view.getId() == R.id.savebtn && !check()) {
             uploadSchedule = "";
             uploadName = nameDishEditText.getText().toString();
             uploadPrice = Integer.parseInt(priceDishEditText.getText().toString());
@@ -135,7 +136,20 @@ public class Dish extends AppCompatActivity implements View.OnClickListener{
             saveData();
 
 
+        }else{
+            Toast.makeText(getApplicationContext(),"Información Incompleta",Toast.LENGTH_SHORT).show();
+
         }
+
+    }
+
+    public boolean check(){
+        return (((nameDishEditText.getText()).toString().equals(""))||
+                ((priceDishEditText.getText()).equals("")) ||
+                ((ingredientsDishEditText.getText()).toString().equals(""))||
+                ((durationTextView.getText()).toString().equals(""))||
+                (!morningCheckBox.isChecked()&&!eveningCheckBox.isChecked()&&
+                        !afternoonCheckBox.isChecked())||(imageUri == null));
     }
 
     public void saveData(){

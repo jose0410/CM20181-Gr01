@@ -28,14 +28,14 @@ import java.io.InputStream;
 
 import co.edu.udea.compumovil.gr01_20181.labscm20181.R;
 
-public class Drink extends AppCompatActivity implements View.OnClickListener{
+public class Drink extends AppCompatActivity implements View.OnClickListener {
 
     public static final int IMAGE_GALLERY_REQUEST = 20;
     private ImageView photoDrinkImageView, imageLoad;
     private EditText nameDrinkEditText;
     private EditText priceDrinkEditText;
     private EditText ingredientsDrinkEditText;
-    private String uploadNameDrink = "",uploadIngredientsDrink, uploadImageDrink;
+    private String uploadNameDrink = "", uploadIngredientsDrink, uploadImageDrink;
     private int uploadPriceDrink = 0;
     private TextView nameLoad, priceLoad, ingredientsLoad;
     private Button save;
@@ -47,6 +47,7 @@ public class Drink extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drink);
 
+        imageUri =  null;
         Toolbar myToolbar = findViewById(R.id.toolbar_drink);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -75,7 +76,7 @@ public class Drink extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.savebtn) {
+        if (view.getId() == R.id.savebtn && !check()) {
             uploadNameDrink = nameDrinkEditText.getText().toString();
             uploadPriceDrink = Integer.parseInt(priceDrinkEditText.getText().toString());
             uploadIngredientsDrink = ingredientsDrinkEditText.getText().toString();
@@ -93,22 +94,30 @@ public class Drink extends AppCompatActivity implements View.OnClickListener{
 
             saveData();
 
+        } else {
+            Toast.makeText(getApplicationContext(), "Información Incompleta", Toast.LENGTH_SHORT).show();
 
         }
     }
 
-    public void saveData(){
+    public boolean check() {
+        return (((nameDrinkEditText.getText()).toString().equals("")) ||
+                ((priceDrinkEditText.getText()).equals("")) ||
+                ((ingredientsDrinkEditText.getText()).toString().equals("")) ||
+                (imageUri == null));
+    }
+
+    public void saveData() {
         SharedPreferences preferDrink = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editorDrink = preferDrink.edit();
         editorDrink.putString("NameDrink", uploadNameDrink);
         editorDrink.putInt("PriceDrink", uploadPriceDrink);
         editorDrink.putString("IngredientsDrink", uploadIngredientsDrink);
         editorDrink.putString("PhotoDrink", uploadImageDrink);
-
         editorDrink.apply();
     }
 
-    public void loadData(){
+    public void loadData() {
         SharedPreferences prefer = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = prefer.edit();
         uploadNameDrink = prefer.getString("NameDrink", "");
@@ -144,7 +153,7 @@ public class Drink extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.exit_o:
                 finish();
                 break;
@@ -162,7 +171,7 @@ public class Drink extends AppCompatActivity implements View.OnClickListener{
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
 
-        if (imageUri !=null) {
+        if (imageUri != null) {
             savedInstanceState.putParcelable("photo", imageUri);
         }
 
@@ -182,7 +191,7 @@ public class Drink extends AppCompatActivity implements View.OnClickListener{
         priceDrinkEditText.setText(savedInstanceState.getString("priceDish"));
         ingredientsDrinkEditText.setText(savedInstanceState.getString("ingredientsDish"));
         imageUri = (Uri) savedInstanceState.getParcelable("photo");
-        if (imageUri !=null) {
+        if (imageUri != null) {
             photoDrinkImageView.setImageURI(imageUri);
         }
     }
