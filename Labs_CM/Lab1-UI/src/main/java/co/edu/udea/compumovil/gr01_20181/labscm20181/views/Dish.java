@@ -85,12 +85,16 @@ public class Dish extends AppCompatActivity implements View.OnClickListener{
         priceLoad = findViewById(R.id.priceLoad);
         ingredientsLoad = findViewById(R.id.ingredientsLoad);
         imageLoad = findViewById(R.id.imageLoad);
+        durationLoad = findViewById(R.id.durationLoad);
+        scheduleLoad = findViewById(R.id.scheduleLoad);
 
         loadData();
         nameLoad.setText(uploadName);
         priceLoad.setText(String.valueOf(uploadPrice));
         ingredientsLoad.setText(uploadIngredients);
         imageLoad.setImageBitmap(decodeBase64(uploadImage));
+        scheduleLoad.setText(uploadSchedule);
+        /*durationLoad.setText(uploadDuration);*/
     }
 
     @Override
@@ -100,6 +104,18 @@ public class Dish extends AppCompatActivity implements View.OnClickListener{
             uploadPrice = Integer.parseInt(priceDishEditText.getText().toString());
             uploadIngredients = ingredientsDishEditText.getText().toString();
             uploadImage = encodeToBase64(bitmap);
+            /*uploadDuration = durationTextView.getText().toString();*/
+
+            /*Validation checkbox selected*/
+            if (morningCheckBox.isChecked())
+                uploadSchedule = uploadSchedule + '-' + morningCheckBox.getText().toString();
+
+            if (afternoonCheckBox.isChecked())
+                uploadSchedule = uploadSchedule + '-' + afternoonCheckBox.getText().toString();
+
+            if (eveningCheckBox.isChecked())
+                uploadSchedule = uploadSchedule + eveningCheckBox.getText().toString();
+
             saveData();
         }
     }
@@ -107,10 +123,12 @@ public class Dish extends AppCompatActivity implements View.OnClickListener{
     public void saveData(){
         SharedPreferences prefer = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = prefer.edit();
-        editor.putString("Name",uploadName);
-        editor.putInt("Price",uploadPrice);
-        editor.putString("Ingredients",uploadIngredients);
-        editor.putString("Photo",uploadImage);
+        editor.putString("Name", uploadName);
+        editor.putInt("Price", uploadPrice);
+        editor.putString("Ingredients", uploadIngredients);
+        editor.putString("Photo", uploadImage);
+        editor.putString("Schedule", uploadSchedule);
+        /*editor.putString("Duration", uploadDuration);*/
 
         editor.apply();
     }
@@ -118,10 +136,12 @@ public class Dish extends AppCompatActivity implements View.OnClickListener{
     public void loadData(){
         SharedPreferences prefer = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = prefer.edit();
-        uploadName = prefer.getString("Name","");
-        uploadPrice = prefer.getInt("Price",0);
-        uploadIngredients = prefer.getString("Ingredients","");
-        uploadImage = prefer.getString("Photo","");
+        uploadName = prefer.getString("Name", "");
+        uploadPrice = prefer.getInt("Price", 0);
+        uploadIngredients = prefer.getString("Ingredients", "");
+        uploadImage = prefer.getString("Photo", "");
+        uploadSchedule = prefer.getString("Schedule", "");
+        /*uploadDuration = prefer.getString("Duration", "");*/
 
         editor.apply();
     }

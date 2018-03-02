@@ -98,7 +98,7 @@
         app:layout_constraintTop_toBottomOf="@+id/mainInfo">
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayout3"
+            android:id="@+id/ingredientsContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -185,10 +185,11 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/duration"
             android:layout_alignStart="@+id/duration"
-            android:layout_alignTop="@+id/textInputLayout3"
+            android:layout_alignTop="@+id/ingredientsContainer"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:text="Button" />
+            android:textColor="@color/colorAccent"
+            android:text="@string/save" />
 
     </RelativeLayout>
 
@@ -230,25 +231,29 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.13" />
 
         <TextView
             android:id="@+id/priceLoad"
-            android:layout_width="172dp"
+            android:layout_width="79dp"
             android:layout_height="26dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/ingredientsLoad"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.894"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/durationLoad"
+            app:layout_constraintHorizontal_bias="0.931"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ingredientsLoad"
+            app:layout_constraintVertical_bias="0.428" />
 
         <TextView
             android:id="@+id/ingredientsLoad"
             android:layout_width="173dp"
             android:layout_height="25dp"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="56dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -258,30 +263,30 @@
 
         <TextView
             android:id="@+id/scheduleLoad"
-            android:layout_width="76dp"
+            android:layout_width="171dp"
             android:layout_height="28dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/durationLoad"
-            app:layout_constraintHorizontal_bias="0.993"
+            app:layout_constraintBottom_toTopOf="@+id/ingredientsLoad"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.893" />
+            app:layout_constraintTop_toBottomOf="@+id/nameLoad" />
 
         <TextView
             android:id="@+id/durationLoad"
             android:layout_width="82dp"
             android:layout_height="26dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.88" />
+            app:layout_constraintVertical_bias="0.94"
+            android:layout_marginRight="16dp" />
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

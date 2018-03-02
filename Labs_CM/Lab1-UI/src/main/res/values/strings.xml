@@ -25,6 +25,7 @@
     <string name="change">Change</string>
     <string name="tagDuration">Duration</string>
     <string name="duration">Time of preparation</string>
+    <string name="save">Save</string>
 
 
 </resources>

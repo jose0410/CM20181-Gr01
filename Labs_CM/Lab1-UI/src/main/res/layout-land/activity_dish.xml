@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="co.edu.udea.compumovil.gr01_20181.labscm20181.views.Dish">
+    tools:context="co.edu.udea.compumovil.gr01_20181.labscm20181.views.Dish"
+    tools:layout_editor_absoluteY="25dp">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_dish"
@@ -17,18 +18,19 @@
 
     <LinearLayout
         android:id="@+id/mainInfo"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="132dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_dish">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.23000002">
 
         <ImageView
             android:id="@+id/photo"
-            android:layout_width="148dp"
-            android:layout_height="115dp"
+            android:layout_width="111dp"
+            android:layout_height="match_parent"
             android:layout_marginEnd="12dp"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
@@ -36,10 +38,10 @@
             android:layout_marginTop="13dp"
             android:layout_weight="1"
             android:adjustViewBounds="false"
-            android:background="@android:drawable/ic_menu_camera"
             android:cropToPadding="false"
             android:onClick="onImageGalleryClicked"
-            android:scaleType="centerCrop" />
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_camera" />
 
         <LinearLayout
             android:id="@+id/infoDish"
@@ -51,13 +53,13 @@
             android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp">
 
                 <EditText
                     android:id="@+id/nameDish"
-                    android:layout_width="match_parent"
+                    android:layout_width="161dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/nameDish"
@@ -67,12 +69,12 @@
 
 
             <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/price"
-                    android:layout_width="match_parent"
+                    android:layout_width="163dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
@@ -87,31 +89,33 @@
 
     <RelativeLayout
         android:id="@+id/register"
-        android:layout_width="0dp"
-        android:layout_height="130dp"
+        android:layout_width="277dp"
+        android:layout_height="182dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainInfo"
-        app:layout_constraintVertical_bias="0.19999999">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3">
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/ingredientsContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/label"
-            android:layout_marginEnd="55dp"
-            android:layout_marginRight="55dp">
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="12dp"
+            android:gravity="right|end">
 
             <EditText
                 android:id="@+id/ingredients"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/ingredientsDish"
@@ -162,11 +166,9 @@
             android:id="@+id/label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="74dp"
-            android:layout_marginStart="74dp"
-            android:layout_toEndOf="@+id/checkboxSchedule"
-            android:layout_toRightOf="@+id/checkboxSchedule"
+            android:layout_alignLeft="@+id/duration"
+            android:layout_alignStart="@+id/duration"
+            android:layout_alignTop="@+id/checkboxSchedule"
             android:text="@string/tagDuration"
             android:textAlignment="inherit" />
 
@@ -174,14 +176,124 @@
             android:id="@+id/duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/label"
-            android:layout_alignStart="@+id/label"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/label"
-            android:layout_marginTop="16dp"
+            android:layout_marginEnd="75dp"
+            android:layout_marginRight="75dp"
+            android:layout_marginTop="13dp"
             android:hint="@string/change"
             android:onClick="showPickerDialog"
             android:textSize="20sp" />
 
     </RelativeLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="469dp"
+        android:layout_height="161dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <ImageView
+            android:id="@+id/imageLoad"
+            android:layout_width="139dp"
+            android:layout_height="142dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.04"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nameLoad"
+            android:layout_width="171dp"
+            android:layout_height="31dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="44dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.613"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/priceLoad"
+            android:layout_width="128dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/nameLoad"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/ingredientsLoad"
+            android:layout_width="173dp"
+            android:layout_height="25dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.617"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/scheduleLoad"
+            android:layout_width="171dp"
+            android:layout_height="28dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/ingredientsLoad"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.613"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameLoad" />
+
+        <TextView
+            android:id="@+id/durationLoad"
+            android:layout_width="82dp"
+            android:layout_height="26dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.94" />
+    </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/savebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/save"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="8dp" />
 
 </android.support.constraint.ConstraintLayout>
