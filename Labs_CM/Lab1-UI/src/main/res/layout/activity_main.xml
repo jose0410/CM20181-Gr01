@@ -44,7 +44,7 @@
         fab:menu_colorNormal="#da3c2f"
         fab:menu_colorPressed="#dc4b3f"
         fab:menu_colorRipple="#99d4d4d4"
-        fab:menu_fab_label="Add"
+        fab:menu_fab_label="@string/addMenu"
         fab:menu_fab_size="normal"
         fab:menu_icon="@drawable/fab_add"
         fab:menu_labels_colorNormal="#333"
@@ -74,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/fab_add"
-            fab:fab_label="Add Dish"
+            fab:fab_label="@string/addDish"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
@@ -82,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/fab_add"
-            fab:fab_label="Add Drink"
+            fab:fab_label="@string/addDrink"
             fab:fab_size="mini" />
     </com.github.clans.fab.FloatingActionMenu>
 

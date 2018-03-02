@@ -26,6 +26,9 @@
     <string name="tagDuration">Duration</string>
     <string name="duration">Time of preparation</string>
     <string name="save">Save</string>
+    <string name="addMenu">Add</string>
+    <string name="exit">Exit</string>
+    <string name="clear">Clear</string>
 
 
 </resources>

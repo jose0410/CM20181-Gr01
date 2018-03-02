@@ -27,4 +27,7 @@
     <string name="tagDuration">Duracion</string>
     <string name="duration">Tiempo de Preparación</string>
     <string name="save">Guardar</string>
+    <string name="addMenu">Agregar</string>
+    <string name="exit">Salir</string>
+    <string name="clear">Limpiar</string>
 </resources>

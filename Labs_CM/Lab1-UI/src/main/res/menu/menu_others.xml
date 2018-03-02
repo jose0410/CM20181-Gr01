@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/clean"
-        android:title="Clean"
+        android:title="@string/clear"
         android:icon="@drawable/ic_eraser"
         android:orderInCategory="100"
         app:showAsAction="ifRoom"/>
     <item android:id="@+id/exit_o"
-        android:title="Exit"
+        android:title="@string/exit"
         android:orderInCategory="100"
         app:showAsAction="never"/>
 </menu>

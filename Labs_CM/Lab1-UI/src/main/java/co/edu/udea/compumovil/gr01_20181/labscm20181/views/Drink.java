@@ -1,41 +1,53 @@
 package co.edu.udea.compumovil.gr01_20181.labscm20181.views;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import co.edu.udea.compumovil.gr01_20181.labscm20181.R;
 
-public class Drink extends AppCompatActivity {
+public class Drink extends AppCompatActivity implements View.OnClickListener{
 
     public static final int IMAGE_GALLERY_REQUEST = 20;
-    private ImageView photoDrinkImageView;
+    private ImageView photoDrinkImageView, imageLoad;
     private EditText nameDrinkEditText;
     private EditText priceDrinkEditText;
     private EditText ingredientsDrinkEditText;
-    Uri imageUri;
+    private String uploadNameDrink = "",uploadIngredientsDrink, uploadImageDrink;
+    private int uploadPriceDrink = 0;
+    private TextView nameLoad, priceLoad, ingredientsLoad;
+    private Button save;
+    private Uri imageUri;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drink);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar_drink);
+        Toolbar myToolbar = findViewById(R.id.toolbar_drink);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -44,6 +56,84 @@ public class Drink extends AppCompatActivity {
         nameDrinkEditText = findViewById(R.id.nameDrink);
         priceDrinkEditText = findViewById(R.id.priceDrink);
         ingredientsDrinkEditText = findViewById(R.id.ingredientsDrink);
+
+        nameLoad = findViewById(R.id.nameLoad);
+        priceLoad = findViewById(R.id.priceLoad);
+        ingredientsLoad = findViewById(R.id.ingredientsLoad);
+        imageLoad = findViewById(R.id.imageLoad);
+
+        save = findViewById(R.id.savebtn);
+
+        save.setOnClickListener(this);
+
+        loadData();
+        nameLoad.setText(uploadNameDrink);
+        priceLoad.setText(String.valueOf(uploadPriceDrink));
+        ingredientsLoad.setText(uploadIngredientsDrink);
+        imageLoad.setImageBitmap(decodeBase64(uploadImageDrink));
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.savebtn) {
+            uploadNameDrink = nameDrinkEditText.getText().toString();
+            uploadPriceDrink = Integer.parseInt(priceDrinkEditText.getText().toString());
+            uploadIngredientsDrink = ingredientsDrinkEditText.getText().toString();
+            uploadImageDrink = encodeToBase64(bitmap);
+
+            nameLoad.setText(uploadNameDrink);
+            priceLoad.setText(String.valueOf(uploadPriceDrink));
+            ingredientsLoad.setText(uploadIngredientsDrink);
+            imageLoad.setImageBitmap(decodeBase64(uploadImageDrink));
+
+            photoDrinkImageView.setImageResource(R.drawable.ic_camera);
+            nameDrinkEditText.setText("");
+            priceDrinkEditText.setText("");
+            ingredientsDrinkEditText.setText("");
+
+            saveData();
+
+
+        }
+    }
+
+    public void saveData(){
+        SharedPreferences preferDrink = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editorDrink = preferDrink.edit();
+        editorDrink.putString("NameDrink", uploadNameDrink);
+        editorDrink.putInt("PriceDrink", uploadPriceDrink);
+        editorDrink.putString("IngredientsDrink", uploadIngredientsDrink);
+        editorDrink.putString("PhotoDrink", uploadImageDrink);
+
+        editorDrink.apply();
+    }
+
+    public void loadData(){
+        SharedPreferences prefer = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = prefer.edit();
+        uploadNameDrink = prefer.getString("NameDrink", "");
+        uploadPriceDrink = prefer.getInt("PriceDrink", 0);
+        uploadIngredientsDrink = prefer.getString("IngredientsDrink", "");
+        uploadImageDrink = prefer.getString("PhotoDrink", "");
+
+        editor.apply();
+    }
+
+    public static String encodeToBase64(Bitmap image) {
+        Bitmap immage = image;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        immage.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+
+        Log.d("Image Log:", imageEncoded);
+        return imageEncoded;
+    }
+
+    public static Bitmap decodeBase64(String input) {
+        byte[] decodedByte = Base64.decode(input, 0);
+        return BitmapFactory
+                .decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 
     @Override
@@ -137,6 +227,8 @@ public class Drink extends AppCompatActivity {
 
                     // show the image to the user
                     photoDrinkImageView.setImageBitmap(image);
+
+                    bitmap = image;
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
