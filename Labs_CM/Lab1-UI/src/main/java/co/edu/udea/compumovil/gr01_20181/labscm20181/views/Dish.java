@@ -95,7 +95,7 @@ public class Dish extends AppCompatActivity implements View.OnClickListener{
         ingredientsLoad.setText(uploadIngredients);
         imageLoad.setImageBitmap(decodeBase64(uploadImage));
         scheduleLoad.setText(uploadSchedule);
-        /*durationLoad.setText(uploadDuration);*/
+        durationLoad.setText(uploadDuration);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class Dish extends AppCompatActivity implements View.OnClickListener{
             uploadPrice = Integer.parseInt(priceDishEditText.getText().toString());
             uploadIngredients = ingredientsDishEditText.getText().toString();
             uploadImage = encodeToBase64(bitmap);
-            /*uploadDuration = durationTextView.getText().toString();*/
+            uploadDuration = durationTextView.getText().toString();
 
             /*Validation checkbox selected*/
             if (morningCheckBox.isChecked())
@@ -123,6 +123,7 @@ public class Dish extends AppCompatActivity implements View.OnClickListener{
             ingredientsLoad.setText(uploadIngredients);
             imageLoad.setImageBitmap(decodeBase64(uploadImage));
             scheduleLoad.setText(uploadSchedule);
+            durationLoad.setText(uploadDuration);
 
             photoImageView.setImageResource(R.drawable.ic_camera);
             nameDishEditText.setText("");
@@ -160,7 +161,7 @@ public class Dish extends AppCompatActivity implements View.OnClickListener{
         editor.putString("Ingredients", uploadIngredients);
         editor.putString("Photo", uploadImage);
         editor.putString("Schedule", uploadSchedule);
-        /*editor.putString("Duration", uploadDuration);*/
+        editor.putString("Duration", uploadDuration);
 
         editor.apply();
     }
@@ -173,7 +174,7 @@ public class Dish extends AppCompatActivity implements View.OnClickListener{
         uploadIngredients = prefer.getString("Ingredients", "");
         uploadImage = prefer.getString("Photo", "");
         uploadSchedule = prefer.getString("Schedule", "");
-        /*uploadDuration = prefer.getString("Duration", "");*/
+        uploadDuration = prefer.getString("Duration", "");
 
         editor.apply();
     }

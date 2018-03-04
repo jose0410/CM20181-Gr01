@@ -13,7 +13,7 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <LinearLayout
         android:id="@+id/mainInfo"
@@ -35,10 +35,10 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="13dp"
             android:layout_weight="1"
-            android:scaleType="fitCenter"
             android:adjustViewBounds="false"
             android:cropToPadding="false"
             android:onClick="onImageGalleryClicked"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/ic_camera" />
 
         <LinearLayout
@@ -188,25 +188,29 @@
             android:layout_alignTop="@+id/ingredientsContainer"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:textColor="@color/colorAccent"
-            android:text="@string/save" />
+            android:text="@string/save"
+            android:textColor="@color/colorAccent" />
 
     </RelativeLayout>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="368dp"
-        android:layout_height="176dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="164dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <ImageView
             android:id="@+id/imageLoad"
-            android:layout_width="139dp"
-            android:layout_height="142dp"
+            android:layout_width="112dp"
+            android:layout_height="109dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
@@ -215,78 +219,180 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.04"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/nameLoad"
-            android:layout_width="171dp"
-            android:layout_height="31dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/priceLoad"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintHorizontal_bias="0.033"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.13" />
+            app:layout_constraintVertical_bias="0.0" />
 
-        <TextView
-            android:id="@+id/priceLoad"
-            android:layout_width="79dp"
-            android:layout_height="26dp"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/nameLoadContainer"
+            android:layout_width="100dp"
+            android:layout_height="55dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/durationLoad"
-            app:layout_constraintHorizontal_bias="0.931"
+            app:layout_constraintBottom_toTopOf="@+id/scheduleLoadContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.58"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ingredientsLoad"
-            app:layout_constraintVertical_bias="0.428" />
-
-        <TextView
-            android:id="@+id/ingredientsLoad"
-            android:layout_width="173dp"
-            android:layout_height="25dp"
-            android:layout_marginBottom="56dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.899"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/scheduleLoad"
-            android:layout_width="171dp"
-            android:layout_height="28dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/ingredientsLoad"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.9"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nameLoad" />
-
-        <TextView
-            android:id="@+id/durationLoad"
-            android:layout_width="82dp"
-            android:layout_height="26dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.94"
-            android:layout_marginRight="16dp" />
+            app:layout_constraintVertical_bias="0.0">
+
+            <com.github.clans.fab.Label
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nameDish"
+                android:textAlignment="inherit" />
+
+            <TextView
+                android:id="@+id/nameLoad"
+                android:layout_width="171dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/priceLoad"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.9"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.13" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/priceLoadContainer"
+            android:layout_width="97dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.091"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.github.clans.fab.Label
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/priceDish"
+                android:textAlignment="inherit" />
+
+            <TextView
+                android:id="@+id/priceLoad"
+                android:layout_width="79dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/durationLoad"
+                app:layout_constraintHorizontal_bias="0.931"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ingredientsLoad"
+                app:layout_constraintVertical_bias="0.428" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/ingredientsLoadContainer"
+            android:layout_width="184dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.875"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
+
+            <com.github.clans.fab.Label
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ingredientsDish"
+                android:textAlignment="inherit" />
+
+            <TextView
+                android:id="@+id/ingredientsLoad"
+                android:layout_width="173dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.899"
+                app:layout_constraintStart_toStartOf="parent" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/scheduleLoadContainer"
+            android:layout_width="199dp"
+            android:layout_height="55dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="56dp"
+            app:layout_constraintBottom_toTopOf="@+id/ingredientsLoadContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.953"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.125">
+
+            <com.github.clans.fab.Label
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tagSchedule"
+                android:textAlignment="inherit" />
+
+            <TextView
+                android:id="@+id/scheduleLoad"
+                android:layout_width="171dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/ingredientsLoad"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.9"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nameLoad" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/durationLoadContainer"
+            android:layout_width="85dp"
+            android:layout_height="51dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.97"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.github.clans.fab.Label
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tagDuration"
+                android:textAlignment="inherit" />
+
+            <TextView
+                android:id="@+id/durationLoad"
+                android:layout_width="82dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.94" />
+        </android.support.design.widget.TextInputLayout>
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
