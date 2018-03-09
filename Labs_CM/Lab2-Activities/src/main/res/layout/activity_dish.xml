@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.edu.udea.compumovil.gr01_20181.lab2.DishActivity">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp"
+        tools:ignore="MissingConstraints">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_dish"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/mainInfo"
+        android:layout_width="match_parent"
+        android:layout_height="176dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/photoBitmap"
+            android:layout_width="148dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="13dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            android:onClick="onImageGalleryClicked"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_camera" />
+
+        <LinearLayout
+            android:id="@+id/infoDish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp">
+
+                <EditText
+                    android:id="@+id/nameDish"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/nameDish"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapWords|textNoSuggestions" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="@string/priceDish"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal" />
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/register"
+        android:layout_width="match_parent"
+        android:layout_height="187dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainInfo"
+        app:layout_constraintVertical_bias="0.274">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/ingredientsContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="12dp">
+
+            <EditText
+                android:id="@+id/ingredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/ingredientsDish"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords|textNoSuggestions" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <LinearLayout
+            android:id="@+id/checkboxSchedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="30dp"
+            android:orientation="vertical">
+
+            <com.github.clans.fab.Label
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tagSchedule"
+                android:textAlignment="inherit" />
+
+            <CheckBox
+                android:id="@+id/morningCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/morning" />
+
+            <CheckBox
+                android:id="@+id/afternoonCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/afternoon" />
+
+            <CheckBox
+                android:id="@+id/eveningCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/evening" />
+
+        </LinearLayout>
+
+        <com.github.clans.fab.Label
+            android:id="@+id/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/duration"
+            android:layout_alignStart="@+id/duration"
+            android:layout_alignTop="@+id/checkboxSchedule"
+            android:text="@string/tagDuration"
+            android:textAlignment="inherit" />
+
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/label"
+            android:layout_marginEnd="75dp"
+            android:layout_marginRight="75dp"
+            android:layout_marginTop="13dp"
+            android:hint="@string/change"
+            android:onClick="showPickerDialog"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/savebtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/duration"
+            android:layout_alignStart="@+id/duration"
+            android:layout_alignTop="@+id/ingredientsContainer"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:text="@string/save"
+            android:textColor="@color/colorAccent" />
+
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>

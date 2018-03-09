@@ -13,6 +13,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.edu.udea.compumovil.gr01_20181.lab2.ImageCodeClass;
 import co.edu.udea.compumovil.gr01_20181.lab2.R;
 
 public class DbHelper extends SQLiteOpenHelper {
@@ -42,7 +43,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.insert(StatusContract.TABLE_USER, null, user.toContentValues());
 
         db.execSQL("CREATE TABLE " + StatusContract.TABLE_DISH + " ("
-                + StatusContract.Column_Dish.ID + " INT PRIMARY KEY,"
+                + StatusContract.Column_Dish.ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + StatusContract.Column_Dish.NAME + " TEXT NOT NULL,"
                 + StatusContract.Column_Dish.TYPE + " TEXT NOT NULL,"
                 + StatusContract.Column_Dish.PRICE + " TEXT NOT NULL,"
@@ -50,10 +51,16 @@ public class DbHelper extends SQLiteOpenHelper {
                 + StatusContract.Column_Dish.INGREDIENTS + " TEXT,"
                 + StatusContract.Column_Dish.PHOTO + " TEXT NOT NULL)");
 
-        pic = BitmapFactory.decodeResource(c.getResources(), R.drawable.ic_camera);
-
-        DishStructure dish = new DishStructure("Bandeja","mañana","15000", "15:00 min","1234","Arroz, Frijoles, Huevo");
-        db.insert(StatusContract.TABLE_DISH, null, dish.toContentValues());
+        Bitmap imageBitmap;
+        imageBitmap = BitmapFactory.decodeResource(c.getResources(), R.drawable.papas);
+        DishStructure dishStructure = new DishStructure("CLÁSICA","Mañana","12.000","15:00 min", ImageCodeClass.encodeToBase64(imageBitmap),"PAN AJONJOLÍ , 150 GRS DE CARNE 100% RES A LA PARRILLA, LECHUGA, TOMATE Y CEBOLLA. ");
+        db.insert(StatusContract.TABLE_DISH, null, dishStructure.toContentValues());
+        imageBitmap = BitmapFactory.decodeResource(c.getResources(), R.drawable.papas);
+        dishStructure = new DishStructure("BURGER SALAD","Mañana","10.000","10:00 min",ImageCodeClass.encodeToBase64(imageBitmap),"Ensalada de lechugas frescas con carne a la parrilla, tomates marinados, cebollas de la casa, queso parmesano, cebolla puerro, champiñones y papas chips.");
+        db.insert(StatusContract.TABLE_DISH, null, dishStructure.toContentValues());
+        imageBitmap = BitmapFactory.decodeResource(c.getResources(), R.drawable.papas);
+        dishStructure = new DishStructure("PAPAS AMERICANAS","Mañana","15.000","11:00 min",ImageCodeClass.encodeToBase64(imageBitmap),"Papas a la francesa, bañadas en queso cheddar fundido acompañadas de tomates marinados y tocineta finamente picados, cebollin y sour cream");
+        db.insert(StatusContract.TABLE_DISH, null, dishStructure.toContentValues());
 
 
 

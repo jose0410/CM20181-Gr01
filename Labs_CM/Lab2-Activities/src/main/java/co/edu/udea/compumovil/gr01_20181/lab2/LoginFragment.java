@@ -70,17 +70,22 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     DbHelper dbHelper = new DbHelper(getContext());
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
                     Cursor c = db.rawQuery("SELECT " + StatusContract.Column_User.MAIL +
+                            ", " + StatusContract.Column_User.NAME +
                             " FROM " + StatusContract.TABLE_USER +
                             " WHERE " + StatusContract.Column_User.USER + " = '" + user +
                             "' AND " + StatusContract.Column_User.PASSWORD + " = '" + pass + "'", null);
 
                     if (c.moveToFirst()) {
                         mail = c.getString(0);
+                        name = c.getString(1);
                         ContentValues contentValues = new ContentValues();
                         contentValues.put(StatusContract.Column_User.STATE, "ACTIVO");
                         db.updateWithOnConflict(StatusContract.TABLE_USER, contentValues,
                                 StatusContract.Column_User.USER + "='" + user + "'", null, SQLiteDatabase.CONFLICT_IGNORE);
                         Intent other = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+                        Bundle bundleP = new Bundle();
+                        onSaveInstanceState(bundleP);
+                        other.putExtras(bundleP);
                         getActivity().finish();
                         startActivity(other);
 
@@ -94,5 +99,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
 
 
+
     }
+
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putString(StatusContract.Column_User.MAIL,mail);
+        savedInstanceState.putString(StatusContract.Column_User.NAME,name);
+
+    }
+
 }

@@ -1,18 +1,54 @@
 <resources>
-    <string name="app_name">Lab2-Activities</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="user">User</string>
     <string name="password">Password</string>
     <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="log_up">Log Up</string>
-    <string name="photo">Photo:</string>
+    <string name="photoBitmap">Photo:</string>
     <string name="log_in">Log In</string>
+    <string name="logupS">Log up succesfully</string>
+    <string name="addMenu">Add</string>
+    <string name="addDish">Add Dish</string>
+    <string name="addDrink">Add Drink</string>
+    <string name="app_name">CHEF BURGER</string>
+    <string name="header_description">Chef Burger</string>
+    <string name="about">The 8th August of 2011 born CHEF BURGER COMPANY. Our goal is: ¡The Love for Burgers!</string>
+    <string name="title_activity_menu">Menu</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_dish">Dish</string>
+    <string name="title_activity_drink">Drink</string>
+    <string name="evening">Night</string>
+    <string name="afternoon">Afternoon</string>
+    <string name="morning">Morning</string>
+    <string name="nameDish">Name</string>
+    <string name="priceDish">Price</string>
+    <string name="ingredientsDish">Ingredients</string>
+    <string name="nameDrink">Name</string>
+    <string name="priceDrink">Price</string>
+    <string name="ingredientsDrink">Ingredients</string>
+    <string name="activityDishName">Dish</string>
+    <string name="activityDrinkName">Drink</string>
+    <string name="tagSchedule">Schedule</string>
+    <string name="change">Change</string>
+    <string name="tagDuration">Duration</string>
+    <string name="duration">Time of preparation</string>
+    <string name="save">Save</string>
+    <string name="exit">Exit</string>
+    <string name="clear">Clear</string>
+
+    <string name="_morning"> Morning</string>
+    <string name="_evening"> Evening</string>
+    <string name="_afternoon"> Afternoon</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="detail">Details</string>
+    <string name="home">Home</string>
+
 </resources>

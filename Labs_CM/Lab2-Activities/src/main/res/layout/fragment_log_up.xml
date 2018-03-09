@@ -87,11 +87,19 @@
                     android:layout_gravity="left"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/photo"
+                    android:text="@string/photoBitmap"
                     android:textSize="20dp"
                     android:layout_marginRight="60dp" />
 
-
+                <ImageView
+                    android:id="@+id/photoUser"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:adjustViewBounds="false"
+                    android:onClick="photoGallery"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_camera"
+                    tools:ignore="OnClick" />
 
             </LinearLayout>
 

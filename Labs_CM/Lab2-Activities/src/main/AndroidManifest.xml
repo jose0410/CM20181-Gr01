@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="co.edu.udea.compumovil.gr01_20181.lab2">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,17 +12,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainActivity"
+        <activity android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name=".LoginActivity">
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".LoginActivity"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".DishActivity"
+            android:label="@string/activityDishName"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustPan">
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".DrinkActivity"
+            android:label="@string/activityDrinkName"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustPan">
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
     </application>
 
