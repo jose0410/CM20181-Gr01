@@ -5,15 +5,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,21 +23,15 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-
 import co.edu.udea.compumovil.gr01_20181.lab2.DB.DbHelper;
 import co.edu.udea.compumovil.gr01_20181.lab2.DB.DishStructure;
 import co.edu.udea.compumovil.gr01_20181.lab2.DB.StatusContract;
-import co.edu.udea.compumovil.gr01_20181.lab2.DB.UserStructure;
 
 public class DishActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     public static final int IMAGE_GALLERY_REQUEST = 20;
-    private ImageView photoImageView, imageLoad;
+    private ImageView photoImageView;
     private EditText nameDishEditText;
     private EditText priceDishEditText;
     private Toolbar myToolbar;
@@ -52,7 +41,6 @@ public class DishActivity extends AppCompatActivity implements View.OnClickListe
     private CheckBox afternoonCheckBox;
     private CheckBox eveningCheckBox;
     private Button save;
-    private Uri imageUri;
     private Bitmap photoBitmap;
 
 
@@ -61,7 +49,7 @@ public class DishActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dish);
 
-        imageUri = null;
+        photoBitmap = null;
         myToolbar = findViewById(R.id.toolbar_dish);
         nameDishEditText = findViewById(R.id.nameDish);
         priceDishEditText = findViewById(R.id.price);
@@ -104,19 +92,11 @@ public class DishActivity extends AppCompatActivity implements View.OnClickListe
             }
             DbHelper dbHelper = new DbHelper(this);
             SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-            photoImageView.setImageResource(R.drawable.ic_camera);
-            nameDishEditText.setText("");
-            priceDishEditText.setText("");
-            ingredientsDishEditText.setText("");
-            durationTextView.setText("");
-            morningCheckBox.setChecked(false);
-            afternoonCheckBox.setChecked(false);
-            eveningCheckBox.setChecked(false);
-
             DishStructure dishDb = new DishStructure(name, price, price, duration, photo, ingredients);
             Snackbar.make(view, R.string.logupS, Snackbar.LENGTH_SHORT).show();
             db.insert(StatusContract.TABLE_DISH, null, dishDb.toContentValues());
+
+            clear();
 
 
         } else {
@@ -138,18 +118,23 @@ public class DishActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.clean:
-                photoImageView.setImageResource(R.drawable.ic_camera);
-                nameDishEditText.setText("");
-                priceDishEditText.setText("");
-                ingredientsDishEditText.setText("");
-                durationTextView.setText("");
-                morningCheckBox.setChecked(false);
-                afternoonCheckBox.setChecked(false);
-                eveningCheckBox.setChecked(false);
-                imageUri = null;
+                clear();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void clear() {
+
+        photoImageView.setImageResource(R.drawable.ic_camera);
+        nameDishEditText.setText("");
+        priceDishEditText.setText("");
+        ingredientsDishEditText.setText("");
+        durationTextView.setText("");
+        morningCheckBox.setChecked(false);
+        afternoonCheckBox.setChecked(false);
+        eveningCheckBox.setChecked(false);
+        photoBitmap = null;
+
     }
 
     public boolean check() {
@@ -158,7 +143,7 @@ public class DishActivity extends AppCompatActivity implements View.OnClickListe
                 ((ingredientsDishEditText.getText()).toString().equals("")) ||
                 ((durationTextView.getText()).toString().equals("")) ||
                 (!morningCheckBox.isChecked() && !eveningCheckBox.isChecked() &&
-                        !afternoonCheckBox.isChecked()) || (imageUri == null));
+                        !afternoonCheckBox.isChecked()) || (photoBitmap == null));
     }
 
     public void onCheckboxClicked(View view) {
@@ -228,52 +213,21 @@ public class DishActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onImageGalleryClicked(View view) {
-        // invoke the image gallery using an implict intent.
-        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-
-        // where do we want to find the data?
-        File pictureDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        String pictureDirectoryPath = pictureDirectory.getPath();
-        // finally, get a URI representation
-        Uri data = Uri.parse(pictureDirectoryPath);
-
-        // set the data and type.  Get all image types.
-        photoPickerIntent.setDataAndType(data, "image/*");
-
-        // we will invoke this activity, and get something back from it.
-        startActivityForResult(photoPickerIntent, IMAGE_GALLERY_REQUEST);
+        ImageCodeClass.photoGallery(view,this,this);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            // if we are here, everything processed successfully.
-            if (requestCode == IMAGE_GALLERY_REQUEST) {
-                // the address of the image on the SD Card.
-                imageUri = data.getData();
 
-                // declare a stream to read the image data from the SD Card.
-                InputStream inputStream;
+        if (requestCode == IMAGE_GALLERY_REQUEST && resultCode == RESULT_OK) {
 
-                // we are getting an input stream, based on the URI of the image.
-                try {
-                    inputStream = getContentResolver().openInputStream(imageUri);
+            Bundle b = data.getExtras();
 
-                    // get a photoBitmap from the stream.
-                    Bitmap image = BitmapFactory.decodeStream(inputStream);
+            Bitmap selectedImage = b.getParcelable("data");
+            photoImageView.setImageBitmap(selectedImage);
+            photoBitmap = selectedImage;
 
-                    // show the image to the user
-                    photoImageView.setImageBitmap(image);
 
-                    photoBitmap = image;
-
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                    // show a message to the user indictating that the image is unavailable.
-                    Toast.makeText(this, "Unable to open image", Toast.LENGTH_LONG).show();
-                }
-
-            }
         }
     }
 
