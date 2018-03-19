@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.conf:
                 namePTextView.setVisibility(View.GONE);
                 photoImageView.setVisibility(View.GONE);
+                startActivity(new Intent(this,AppPreferences.class));
                 break;
 
             case R.id.logout:
