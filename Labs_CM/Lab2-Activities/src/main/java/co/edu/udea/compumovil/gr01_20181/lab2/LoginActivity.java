@@ -78,26 +78,19 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void photoGallery(View v) {
-        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
-        } else {
-            photoPickerIntent.setType("image/*");
-            startActivityForResult(photoPickerIntent, IMAGE_GALLERY_REQUEST);
-        }
+        ImageCodeClass.photoGallery(v,this, this);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == IMAGE_GALLERY_REQUEST && resultCode == RESULT_OK) {
-            Uri imageUri = data.getData();
-            try {
-                Bitmap selectedImage = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-                LogupFragment frag = (LogupFragment) getSupportFragmentManager().findFragmentByTag("registrarUsuario");
-                frag.setPhotoBitmap(selectedImage);
-            } catch (IOException e) {
-            }
+
+            Bundle b = data.getExtras();
+
+            Bitmap selectedImage = b.getParcelable("data");
+            LogupFragment frag = (LogupFragment) getSupportFragmentManager().findFragmentByTag("registrarUsuario");
+            frag.setPhotoBitmap(selectedImage);
 
         }
     }

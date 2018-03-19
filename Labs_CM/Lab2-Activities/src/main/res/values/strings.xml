@@ -58,5 +58,6 @@
     <string name="notificationCheck">Enable the Notifications</string>
     <string name="notificationSoundCheck">Enable the sound of the Notificaations</string>
     <string name="notificationsSoundAuthorization">Notifications Sound</string>
+    <string name="unable">Unable to open image</string>
 
 </resources>
