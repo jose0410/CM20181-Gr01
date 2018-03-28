@@ -31,6 +31,7 @@ public class DishActivity extends AppCompatActivity implements View.OnClickListe
 
 
     public static final int IMAGE_GALLERY_REQUEST = 20;
+    public static final int EXTRAS_CODE = 1;
     private ImageView photoImageView;
     private EditText nameDishEditText;
     private EditText priceDishEditText;
@@ -40,6 +41,7 @@ public class DishActivity extends AppCompatActivity implements View.OnClickListe
     private CheckBox morningCheckBox;
     private CheckBox afternoonCheckBox;
     private CheckBox eveningCheckBox;
+    private String mail, name;
     private Button save;
     private Bitmap photoBitmap;
 
@@ -66,6 +68,18 @@ public class DishActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
+        if(getIntent().getExtras()!=null){
+            Bundle bundle = getIntent().getExtras();
+            mail = bundle.getString(StatusContract.Column_User.MAIL);
+            name = bundle.getString(StatusContract.Column_User.NAME);
+            Intent intent = new Intent();
+            Bundle bundleP = new Bundle();
+            onSaveInstanceState(bundleP);
+            intent.putExtras(bundleP);
+            setResult(EXTRAS_CODE, intent);
+        }
 
 
     }
@@ -120,6 +134,9 @@ public class DishActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.clean:
                 clear();
                 break;
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -229,6 +246,13 @@ public class DishActivity extends AppCompatActivity implements View.OnClickListe
 
 
         }
+    }
+
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putString(StatusContract.Column_User.MAIL,mail);
+        savedInstanceState.putString(StatusContract.Column_User.NAME,name);
+
     }
 
 

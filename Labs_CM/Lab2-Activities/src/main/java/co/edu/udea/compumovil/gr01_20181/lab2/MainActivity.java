@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -204,16 +205,38 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View view) {
 
         Intent intent;
-        Bundle bun = new Bundle();
+        Bundle bundleP = new Bundle();
         switch (view.getId()) {
             case R.id.addDish:
                 intent = new Intent(this, DishActivity.class);
-                startActivity(intent);
+                onSaveInstanceState(bundleP);
+                intent.putExtras(bundleP);
+                startActivityForResult(intent,1);
                 break;
             case R.id.addDrink:
                 intent = new Intent(this, DrinkActivity.class);
-                startActivity(intent);
+                onSaveInstanceState(bundleP);
+                intent.putExtras(bundleP);
+                startActivityForResult(intent,1);
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Toast.makeText(this,"ok",Toast.LENGTH_SHORT);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            mail = bundle.getString(StatusContract.Column_User.MAIL);
+            name = bundle.getString(StatusContract.Column_User.NAME);
+            nameDrawer.setText(name);
+        }
+    }
+
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putString(StatusContract.Column_User.MAIL,mail);
+        savedInstanceState.putString(StatusContract.Column_User.NAME,name);
+
     }
 }

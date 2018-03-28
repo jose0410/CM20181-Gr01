@@ -48,15 +48,18 @@ public class LoginActivity extends AppCompatActivity {
                 DbHelper dbHelper = new DbHelper(getApplicationContext());
                 SQLiteDatabase db = dbHelper.getReadableDatabase();
                 Cursor c = db.rawQuery("select "+ StatusContract.Column_User.MAIL +
+                        ", " + StatusContract.Column_User.NAME +
                         " from " + StatusContract.TABLE_USER +
                         " where " + StatusContract.Column_User.STATE + " = 'ACTIVO' " , null);
 
 
                 if(c.moveToFirst()){
                     mail = c.getString(0);
+                    String name = c.getString(1);
                     Intent other = new Intent(getApplicationContext(), MainActivity.class);
                     Bundle bundleP = new Bundle();
                     bundleP.putString(StatusContract.Column_User.MAIL,mail);
+                    bundleP.putString(StatusContract.Column_User.NAME,name);
                     other.putExtras(bundleP);
                     finish();
                     startActivity(other);

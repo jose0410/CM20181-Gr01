@@ -3,15 +3,11 @@ package co.edu.udea.compumovil.gr01_20181.lab2;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,26 +16,22 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-
 import co.edu.udea.compumovil.gr01_20181.lab2.DB.DbHelper;
-import co.edu.udea.compumovil.gr01_20181.lab2.DB.DishStructure;
 import co.edu.udea.compumovil.gr01_20181.lab2.DB.DrinkStructure;
 import co.edu.udea.compumovil.gr01_20181.lab2.DB.StatusContract;
 
 public class DrinkActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final int IMAGE_GALLERY_REQUEST = 20;
-    private ImageView photoDrinkImageView, imageLoad;
+    public static final int EXTRAS_CODE = 1;
+    private ImageView photoDrinkImageView;
     private EditText nameDrinkEditText;
     private Toolbar myToolbar;
     private EditText priceDrinkEditText;
     private EditText ingredientsDrinkEditText;
     private Button save;
     private Uri imageUri;
+    private String mail, name;
     private Bitmap photoBitmap;
 
     @Override
@@ -60,6 +52,16 @@ public class DrinkActivity extends AppCompatActivity implements View.OnClickList
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        if(getIntent().getExtras()!=null){
+            Bundle bundle = getIntent().getExtras();
+            mail = bundle.getString(StatusContract.Column_User.MAIL);
+            name = bundle.getString(StatusContract.Column_User.NAME);
+            Intent intent = new Intent();
+            Bundle bundleP = new Bundle();
+            onSaveInstanceState(bundleP);
+            intent.putExtras(bundleP);
+            setResult(EXTRAS_CODE, intent);
+        }
 
 
     }
@@ -110,6 +112,9 @@ public class DrinkActivity extends AppCompatActivity implements View.OnClickList
                 ingredientsDrinkEditText.setText("");
                 imageUri = null;
                 break;
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -139,6 +144,15 @@ public class DrinkActivity extends AppCompatActivity implements View.OnClickList
 
         }
     }
+
+
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putString(StatusContract.Column_User.MAIL,mail);
+        savedInstanceState.putString(StatusContract.Column_User.NAME,name);
+
+    }
+
 
 
 }
