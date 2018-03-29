@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,7 @@ public class DishesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dishes, container, false);
         initializeDataPersons();
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_content);
+        mRecyclerView = view.findViewById(R.id.rv_content);
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(linearLayoutManager);
@@ -58,12 +59,15 @@ public class DishesFragment extends Fragment {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         Cursor c = db.rawQuery("SELECT * FROM " + StatusContract.TABLE_DISH , null);
-        c.moveToFirst();
 
-        do{
-            dishList.add(new DishStructure(c.getString(1), c.getString(2),c.getString(3),c.getString(4),c.getString(6),c.getString(5)));
-        }while (c.moveToNext());
 
+        if(c.getCount()>0) {
+            c.moveToFirst();
+            do {
+                Log.d("CURSOR CONTAIN: ", c.getColumnName(1));
+                dishList.add(new DishStructure(c.getString(1), c.getString(2), c.getString(3), c.getString(4), c.getString(6), c.getString(5)));
+            } while (c.moveToNext());
+        }
         db.close();
 
 
