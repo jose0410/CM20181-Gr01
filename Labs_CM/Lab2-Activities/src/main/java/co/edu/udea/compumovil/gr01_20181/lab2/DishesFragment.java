@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ public class DishesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dishes, container, false);
-        initializeDataPersons();
+        initializeDataPersons(view);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_content);
         mRecyclerView.setHasFixedSize(true);
@@ -51,18 +52,20 @@ public class DishesFragment extends Fragment {
         return view;
     }
 
-    private void initializeDataPersons(){
+    private void initializeDataPersons(View view){
         dishList = new ArrayList<>();
 
         DbHelper dbHelper = new DbHelper(getContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         Cursor c = db.rawQuery("SELECT * FROM " + StatusContract.TABLE_DISH , null);
-        c.moveToFirst();
-
-        do{
-            dishList.add(new DishStructure(c.getString(1), c.getString(2),c.getString(3),c.getString(4),c.getString(6),c.getString(5)));
-        }while (c.moveToNext());
+        if(c.moveToFirst()) {
+            do {
+                dishList.add(new DishStructure(c.getString(1), c.getString(2), c.getString(3), c.getString(4), c.getString(6), c.getString(5)));
+            } while (c.moveToNext());
+        }else{
+            Toast.makeText(view.getContext(), "no hay datos registrados" , Toast.LENGTH_SHORT).show();
+        }
 
         db.close();
 
