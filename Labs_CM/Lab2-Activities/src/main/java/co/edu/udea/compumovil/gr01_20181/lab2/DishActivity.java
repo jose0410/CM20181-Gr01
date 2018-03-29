@@ -106,7 +106,7 @@ public class DishActivity extends AppCompatActivity implements View.OnClickListe
             }
             DbHelper dbHelper = new DbHelper(this);
             SQLiteDatabase db = dbHelper.getWritableDatabase();
-            DishStructure dishDb = new DishStructure(name, price, price, duration, photo, ingredients);
+            DishStructure dishDb = new DishStructure(name, type, price, duration, photo, ingredients);
             Snackbar.make(view, R.string.logupS, Snackbar.LENGTH_SHORT).show();
             db.insert(StatusContract.TABLE_DISH, null, dishDb.toContentValues());
 
