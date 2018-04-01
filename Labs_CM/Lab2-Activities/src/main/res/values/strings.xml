@@ -59,5 +59,9 @@
     <string name="notificationSoundCheck">Enable the sound of the Notificaations</string>
     <string name="notificationsSoundAuthorization">Notifications Sound</string>
     <string name="unable">Unable to open image</string>
+    <string name="userSettingsDescription">Change the name you use</string>
+    <string name="userName">Name</string>
+    <string name="passwordSettingsDescription">Change the password you use</string>
+    <string name="emailSettingsDescription">Change the email you use</string>
 
 </resources>

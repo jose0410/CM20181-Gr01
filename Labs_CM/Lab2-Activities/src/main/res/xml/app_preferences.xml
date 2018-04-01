@@ -2,11 +2,46 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/settings">
 
-        <EditTextPreference
-            android:defaultValue="@string/profile"
-            android:key="profile"
+        <PreferenceScreen
+            android:key="screen_preference"
             android:summary="@string/profileSettingsDescription"
-            android:title="@string/profile" />
+            android:title="@string/profile">
+
+            <!-- You can place more preferences here that will be shown on the next screen. -->
+
+            <PreferenceCategory android:title="Profile">
+
+                <EditTextPreference
+                    android:defaultValue="@string/userName"
+                    android:key="user"
+                    android:summary="@string/userSettingsDescription"
+                    android:title="@string/userName" />
+
+                <EditTextPreference
+                    android:defaultValue="@string/password"
+                    android:key="password"
+                    android:summary="@string/passwordSettingsDescription"
+                    android:title="@string/password" />
+
+                <EditTextPreference
+                    android:defaultValue="@string/email"
+                    android:key="email"
+                    android:summary="@string/emailSettingsDescription"
+                    android:title="@string/email" />
+
+                <ImageView
+                    android:id="@+id/photoUser"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:adjustViewBounds="false"
+                    android:onClick="photoGallery"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_camera" />
+
+
+            </PreferenceCategory>
+
+        </PreferenceScreen>
 
     </PreferenceCategory>
 

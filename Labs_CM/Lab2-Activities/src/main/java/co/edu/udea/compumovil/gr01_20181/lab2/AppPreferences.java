@@ -22,6 +22,8 @@ public class AppPreferences extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+
+
     public static class SettingsFragment extends PreferenceFragment{
 
         @Override
