@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity
                         " , " + StatusContract.Column_User.NAME +
                         " , " + StatusContract.Column_User.PICTURE +
                         " from " + StatusContract.TABLE_USER +
-                        " where " + StatusContract.Column_User.MAIL + " = '" + mail + "' ", null);
+                        " where " + StatusContract.Column_User.STATE + " = 'ACTIVO' ", null);
                 c.moveToFirst();
                 namePTextView.setText(c.getString(1));
                 photoImageView.setImageBitmap(ImageCodeClass.decodeBase64(c.getString(2)));
@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity
                 ContentValues contentValues = new ContentValues();
                 contentValues.put(StatusContract.Column_User.STATE, "INACTIVO");
                 db.updateWithOnConflict(StatusContract.TABLE_USER, contentValues,
-                        StatusContract.Column_User.MAIL + "='" + mail + "'", null, SQLiteDatabase.CONFLICT_IGNORE);
+                        StatusContract.Column_User.STATE + "='ACTIVO'", null, SQLiteDatabase.CONFLICT_IGNORE);
                 db.close();
                 Intent other = new Intent(getApplication().getApplicationContext(), LoginActivity.class);
                 Bundle bundleP = new Bundle();

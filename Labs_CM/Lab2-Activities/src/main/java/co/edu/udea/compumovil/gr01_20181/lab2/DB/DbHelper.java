@@ -29,14 +29,15 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + StatusContract.TABLE_USER + " ("
+                + StatusContract.Column_User.ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + StatusContract.Column_User.MAIL + " TEXT NOT NULL,"
                 + StatusContract.Column_User.NAME + " TEXT NOT NULL,"
                 + StatusContract.Column_User.USER + " TEXT NOT NULL,"
                 + StatusContract.Column_User.PASSWORD + " TEXT NOT NULL,"
                 + StatusContract.Column_User.PICTURE + " TEXT,"
                 + StatusContract.Column_User.STATE + " TEXT NOT NULL,"
-                + "UNIQUE (" + StatusContract.Column_User.USER + "),"
-                + "PRIMARY KEY (" + StatusContract.Column_User.MAIL + "))");
+                + "UNIQUE (" + StatusContract.Column_User.USER + ", "+ StatusContract.Column_User.ID + "))");
+
         Bitmap pic = BitmapFactory.decodeResource(c.getResources(), R.drawable.ic_camera);
 
         UserStructure user = new UserStructure("Pedro Perez", "pe", "1", "pedroperez@aaaa.com","1234");

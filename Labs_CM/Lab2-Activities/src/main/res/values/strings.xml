@@ -63,5 +63,10 @@
     <string name="userName">Name</string>
     <string name="passwordSettingsDescription">Change the password you use</string>
     <string name="emailSettingsDescription">Change the email you use</string>
+    <string name="photoDescription">Change the photo you use</string>
+    <string name="photoSettingsDescription">Change the Photo you use</string>
+    <string name="saveButtonSettingsDescription">Save all changes you did</string>
+    <string name="apply">Apply</string>
+    <string name="applyBtnSettings">Apply</string>
 
 </resources>

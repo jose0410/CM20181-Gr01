@@ -5,38 +5,42 @@
         <PreferenceScreen
             android:key="screen_preference"
             android:summary="@string/profileSettingsDescription"
-            android:title="@string/profile">
+            android:title="@string/profile"
+            >
 
             <!-- You can place more preferences here that will be shown on the next screen. -->
 
             <PreferenceCategory android:title="Profile">
 
                 <EditTextPreference
-                    android:defaultValue="@string/userName"
                     android:key="user"
+                    android:title="@string/userName"
                     android:summary="@string/userSettingsDescription"
-                    android:title="@string/userName" />
+                    android:dialogTitle="@string/userName"
+                    android:text=""/>
 
                 <EditTextPreference
-                    android:defaultValue="@string/password"
                     android:key="password"
+                    android:title="@string/password"
                     android:summary="@string/passwordSettingsDescription"
-                    android:title="@string/password" />
+                    android:dialogTitle="@string/password"
+                    android:text=""/>
 
                 <EditTextPreference
-                    android:defaultValue="@string/email"
-                    android:key="email"
+                    android:key="mail"
+                    android:title="@string/email"
                     android:summary="@string/emailSettingsDescription"
-                    android:title="@string/email" />
+                    android:dialogTitle="@string/email"
+                    android:text=""/>
 
-                <ImageView
-                    android:id="@+id/photoUser"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:adjustViewBounds="false"
-                    android:onClick="photoGallery"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_camera" />
+
+                <Preference
+                    android:key="photo"
+                    android:layout="@layout/profile_preference_photo"
+                    android:order="4"
+                    android:summary="@string/photoSettingsDescription"
+                    android:title="Setting"></Preference>
+
 
 
             </PreferenceCategory>
