@@ -142,8 +142,9 @@ public class MainActivity extends AppCompatActivity
                 dbHelper = new DbHelper(this);
                 db = dbHelper.getReadableDatabase();
 
-                 namePTextView.setVisibility(View.VISIBLE);
+                namePTextView.setVisibility(View.VISIBLE);
                 photoImageView.setVisibility(View.VISIBLE);
+                
                 Cursor c = db.rawQuery("select " + StatusContract.Column_User.USER +
                         " , " + StatusContract.Column_User.NAME +
                         " , " + StatusContract.Column_User.PICTURE +
