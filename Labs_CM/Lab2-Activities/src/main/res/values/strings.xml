@@ -68,5 +68,6 @@
     <string name="saveButtonSettingsDescription">Save all changes you did</string>
     <string name="apply">Apply</string>
     <string name="applyBtnSettings">Apply</string>
+    <string name="search">Search</string>
 
 </resources>

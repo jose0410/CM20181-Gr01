@@ -12,8 +12,10 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -39,6 +41,16 @@ public class MainActivity extends AppCompatActivity
     private String mail, name;
     private DrawerLayout drawer;
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //getMenuInflater().inflate(R.menu.main, menu);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_others, menu);
+        menu.getItem(1).setVisible(false);
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,7 +156,7 @@ public class MainActivity extends AppCompatActivity
 
                 namePTextView.setVisibility(View.VISIBLE);
                 photoImageView.setVisibility(View.VISIBLE);
-                
+
                 Cursor c = db.rawQuery("select " + StatusContract.Column_User.USER +
                         " , " + StatusContract.Column_User.NAME +
                         " , " + StatusContract.Column_User.PICTURE +

@@ -2,13 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/clean"
-        android:title="@string/clear"
-        android:icon="@drawable/ic_eraser"
+    <item
+        android:id="@+id/app_bar_search"
+        android:icon="@drawable/ic_search_black_24dp"
         android:orderInCategory="100"
-        app:showAsAction="ifRoom"/>
+        android:title="@string/search"
+        android:visibility="visible"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/clean"
+        android:icon="@drawable/ic_eraser"
+        android:orderInCategory="101"
+        android:title="@string/clear"
+        app:showAsAction="always" />
     <item android:id="@+id/exit_o"
         android:title="@string/exit"
-        android:orderInCategory="100"
+        android:orderInCategory="101"
         app:showAsAction="never"/>
+
 </menu>
