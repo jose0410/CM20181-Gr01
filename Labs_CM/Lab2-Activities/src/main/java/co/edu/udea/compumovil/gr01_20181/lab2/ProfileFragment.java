@@ -50,7 +50,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        menu.getItem(1).setVisible(false);
         menu.getItem(0).setVisible(false);
     }
 

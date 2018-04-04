@@ -1,8 +1,6 @@
 package co.edu.udea.compumovil.gr01_20181.lab2;
 
-import android.app.SearchManager;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,7 +15,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,13 +25,11 @@ import android.support.v7.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
-import android.support.v4.view.MenuItemCompat.OnActionExpandListener;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
 import co.edu.udea.compumovil.gr01_20181.lab2.DB.DbHelper;
-import co.edu.udea.compumovil.gr01_20181.lab2.DB.HomeFragment;
 import co.edu.udea.compumovil.gr01_20181.lab2.DB.StatusContract;
 
 public class MainActivity extends AppCompatActivity

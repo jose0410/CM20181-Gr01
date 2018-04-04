@@ -122,6 +122,7 @@ public class DishActivity extends AppCompatActivity implements View.OnClickListe
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_others, menu);
+        menu.getItem(0).setVisible(false);
         return true;
     }
 
