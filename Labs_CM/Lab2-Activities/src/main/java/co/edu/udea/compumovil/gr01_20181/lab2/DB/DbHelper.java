@@ -69,7 +69,7 @@ public class DbHelper extends SQLiteOpenHelper {
         dishStructure = new DishStructure("BURGER","Afternoon","9.000","30:00 min",ImageCodeClass.encodeToBase64(imageBitmap),"Pan Integral, con queso cheddar fundido, cebolla, lechuga y papas fritas en ripio y con doble carne");
         db.insert(StatusContract.TABLE_DISH, null, dishStructure.toContentValues());
 
-        imageBitmap = BitmapFactory.decodeResource(c.getResources(), R.drawable.papas_francesas);
+        imageBitmap = BitmapFactory.decodeResource(c.getResources(), R.drawable.papasfrancesas);
         dishStructure = new DishStructure("PAPAS FRANCESAS","Evening","13.000","18:00 min",ImageCodeClass.encodeToBase64(imageBitmap),"Papas acompañadas de queso cheddar derretido y tocineta");
         db.insert(StatusContract.TABLE_DISH, null, dishStructure.toContentValues());
 
