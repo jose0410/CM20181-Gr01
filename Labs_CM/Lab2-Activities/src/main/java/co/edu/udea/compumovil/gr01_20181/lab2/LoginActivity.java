@@ -1,25 +1,14 @@
 package co.edu.udea.compumovil.gr01_20181.lab2;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -50,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
                 Cursor c = db.rawQuery("select "+ StatusContract.Column_User.MAIL +
                         ", " + StatusContract.Column_User.NAME +
                         " from " + StatusContract.TABLE_USER +
-                        " where " + StatusContract.Column_User.STATE + " = 'ACTIVO' " , null);
+                        " where " + StatusContract.Column_User.SESSION + " = 'ACTIVO' " , null);
 
 
                 if(c.moveToFirst()){

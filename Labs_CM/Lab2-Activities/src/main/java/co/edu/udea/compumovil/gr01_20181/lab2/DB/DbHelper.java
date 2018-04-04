@@ -1,17 +1,10 @@
 package co.edu.udea.compumovil.gr01_20181.lab2.DB;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Base64;
-
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import co.edu.udea.compumovil.gr01_20181.lab2.ImageCodeClass;
 import co.edu.udea.compumovil.gr01_20181.lab2.R;
@@ -36,6 +29,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 + StatusContract.Column_User.PASSWORD + " TEXT NOT NULL,"
                 + StatusContract.Column_User.PICTURE + " TEXT,"
                 + StatusContract.Column_User.STATE + " TEXT NOT NULL,"
+                + StatusContract.Column_User.SESSION + " TEXT NOT NULL,"
                 + "UNIQUE (" + StatusContract.Column_User.USER + ", "+ StatusContract.Column_User.ID + "))");
 
         Bitmap pic = BitmapFactory.decodeResource(c.getResources(), R.drawable.ic_camera);

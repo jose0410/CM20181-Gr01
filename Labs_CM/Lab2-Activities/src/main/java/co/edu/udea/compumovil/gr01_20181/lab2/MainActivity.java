@@ -6,8 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -16,13 +16,13 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.support.v7.widget.SearchView;
 import android.widget.TextView;
@@ -44,10 +44,13 @@ public class MainActivity extends AppCompatActivity
     private FloatingActionMenu fabFloatingActionMenu;
     private NavigationView navigationView;
     private TextView nameDrawer, namePTextView;
+    private FrameLayout frameLayout;
     private ImageView photoImageView;
     private Toolbar toolbar;
     private String mail, name;
     private DrawerLayout drawer;
+    public static final int IMAGE_GALLERY_REQUEST = 20;
+
 
 
     @Override
@@ -89,7 +92,8 @@ public class MainActivity extends AppCompatActivity
         nameDrawer = findViewById(R.id.nameDrawer);
         photoImageView = findViewById(R.id.photoProfile);
         namePTextView = findViewById(R.id.nameProfile);
-        photoImageView = findViewById(R.id.photoProfile);
+        photoImageView = findViewById(R.id.photoProfile);frameLayout = findViewById(R.id.menu);
+
 
 
         navigationView.setNavigationItemSelectedListener(this);
@@ -132,6 +136,7 @@ public class MainActivity extends AppCompatActivity
         DbHelper dbHelper;
         SQLiteDatabase db;
         FragmentTransaction ft;
+        frameLayout.removeAllViews();
         switch (item.getItemId()) {
             case R.id.menuP:
                 namePTextView.setVisibility(View.GONE);
@@ -194,7 +199,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.conf:
                 namePTextView.setVisibility(View.GONE);
                 photoImageView.setVisibility(View.GONE);
-                startActivity(new Intent(this,AppPreferences.class));
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.menu, new ConfigFragment(new DbHelper(this)))
+                        .commit();
                 break;
 
             case R.id.logout:
@@ -205,8 +212,9 @@ public class MainActivity extends AppCompatActivity
                 db = dbHelper.getWritableDatabase();
                 ContentValues contentValues = new ContentValues();
                 contentValues.put(StatusContract.Column_User.STATE, "INACTIVO");
+                contentValues.put(StatusContract.Column_User.SESSION, "INACTIVO");
                 db.updateWithOnConflict(StatusContract.TABLE_USER, contentValues,
-                        StatusContract.Column_User.STATE + "='ACTIVO'", null, SQLiteDatabase.CONFLICT_IGNORE);
+                        StatusContract.Column_User.SESSION + "='ACTIVO'", null, SQLiteDatabase.CONFLICT_IGNORE);
                 db.close();
                 Intent other = new Intent(getApplication().getApplicationContext(), LoginActivity.class);
                 Bundle bundleP = new Bundle();
@@ -261,6 +269,20 @@ public class MainActivity extends AppCompatActivity
             name = bundle.getString(StatusContract.Column_User.NAME);
             nameDrawer.setText(name);
         }
+        if (requestCode == IMAGE_GALLERY_REQUEST && resultCode == RESULT_OK) {
+
+            Bundle b = data.getExtras();
+
+            Bitmap selectedImage = b.getParcelable("data");
+
+            ContentValues changes = new ContentValues();
+            changes.put("picture", ImageCodeClass.encodeToBase64(selectedImage));
+            DbHelper dbHelper = new DbHelper(this);
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+            db.update(StatusContract.TABLE_USER, changes, StatusContract.Column_User.STATE + " = 'ACTIVO'", null);
+
+        }
     }
 
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -304,4 +326,8 @@ public class MainActivity extends AppCompatActivity
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+    public void photoSettings(View v) {
+        ImageCodeClass.photoGallery(v, this, this);
+    }
+
 }

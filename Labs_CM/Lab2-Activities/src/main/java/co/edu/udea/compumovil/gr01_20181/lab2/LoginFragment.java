@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private Button loginButton, logupButton;
     private EditText userEditText, passwordEditText;
     private String mail, name;
+    private CheckBox sesionCheckButton;
 
 
     public LoginFragment() {
@@ -43,6 +45,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         logupButton = (Button) view.findViewById(R.id.logup);
         userEditText = (EditText) view.findViewById(R.id.user);
         passwordEditText = (EditText) view.findViewById(R.id.password);
+        sesionCheckButton = (CheckBox) view.findViewById(R.id.session);
         loginButton.setOnClickListener(this);
         logupButton.setOnClickListener(this);
         return view;
@@ -80,6 +83,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         name = c.getString(1);
                         ContentValues contentValues = new ContentValues();
                         contentValues.put(StatusContract.Column_User.STATE, "ACTIVO");
+                        if (sesionCheckButton.isChecked()){
+                            contentValues.put(StatusContract.Column_User.SESSION, "ACTIVO");
+                        }
                         db.updateWithOnConflict(StatusContract.TABLE_USER, contentValues,
                                 StatusContract.Column_User.USER + "='" + user + "'", null, SQLiteDatabase.CONFLICT_IGNORE);
                         Intent other = new Intent(getActivity().getApplicationContext(), MainActivity.class);

@@ -70,5 +70,8 @@
     <string name="applyBtnSettings">Apply</string>
     <string name="search">Search</string>
     <string name="search_hint">Search</string>
+    <string name="namePref">name</string>
+    <string name="keep_session">Keep Session</string>
+    <string name="session">Session</string>
 
 </resources>
