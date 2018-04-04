@@ -1,13 +1,51 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="co.edu.udea.compumovil.gr01_20181.lab2.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:scaleType="matrix"
+            android:src="@drawable/home"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_weight="2" />
+
+        <ImageView
+            android:layout_width="271dp"
+            android:layout_height="241dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="32dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher_foreground"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.542"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.891"
+            app:layout_constraintVertical_weight="1" />
+    </android.support.constraint.ConstraintLayout>
+
 
 </FrameLayout>
