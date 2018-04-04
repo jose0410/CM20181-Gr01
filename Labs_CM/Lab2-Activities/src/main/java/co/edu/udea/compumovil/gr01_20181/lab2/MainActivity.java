@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity
         //getMenuInflater().inflate(R.menu.main, menu);
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_others, menu);
-        menu.getItem(1).setVisible(false);
+        menu.getItem(2).setVisible(false);
 
         MenuItem searchItem = menu.findItem(R.id.app_bar_search);
 
@@ -277,6 +277,10 @@ public class MainActivity extends AppCompatActivity
         if(fragment instanceof DishesFragment){
             ((DishesFragment) fragment).filter(s);
         }
+
+        if(fragment instanceof DrinksFragment){
+            ((DrinksFragment) fragment).filter(s);
+        }
         return false;
     }
 
@@ -296,6 +300,10 @@ public class MainActivity extends AppCompatActivity
 
         if(fragment instanceof DishesFragment){
             ((DishesFragment) fragment).restart();
+        }
+
+        if(fragment instanceof DrinksFragment){
+            ((DrinksFragment) fragment).restart();
         }
         return true;
     }

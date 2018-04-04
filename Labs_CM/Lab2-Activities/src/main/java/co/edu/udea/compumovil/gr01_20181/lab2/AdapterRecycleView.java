@@ -19,20 +19,23 @@ import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.RecyclerView.Adapter;
 
 import java.util.List;
 
 import co.edu.udea.compumovil.gr01_20181.lab2.DB.DbHelper;
 import co.edu.udea.compumovil.gr01_20181.lab2.DB.DishStructure;
+import co.edu.udea.compumovil.gr01_20181.lab2.DB.DrinkStructure;
 import co.edu.udea.compumovil.gr01_20181.lab2.DB.StatusContract;
 
-public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.DishViewHolder>{
+public class AdapterRecycleView extends Adapter<AdapterRecycleView.DishViewHolder> {
 
     public List<DishStructure> dishes;
 
     public AdapterRecycleView(List<DishStructure> dishes) {
         this.dishes = dishes;
     }
+
 
     @Override
     public DishViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -130,5 +133,8 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
 
 
     }
+
+
+
 
 }

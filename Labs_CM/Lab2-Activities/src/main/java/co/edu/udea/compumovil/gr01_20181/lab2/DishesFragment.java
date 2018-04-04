@@ -3,17 +3,13 @@ package co.edu.udea.compumovil.gr01_20181.lab2;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -59,8 +55,8 @@ public class DishesFragment extends Fragment {
     private void initializeDataPersons(View view){
         dishList = new ArrayList<>();
 
-        dbHelper = new DbHelper(getContext());
-        db = dbHelper.getReadableDatabase();
+        DbHelper dbHelper = new DbHelper(getContext());
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         Cursor c = db.rawQuery("SELECT * FROM " + StatusContract.TABLE_DISH , null);
 
@@ -78,8 +74,8 @@ public class DishesFragment extends Fragment {
 
     public void restart(){
 
-        dbHelper = new DbHelper(getContext());
-        db = dbHelper.getReadableDatabase();
+        DbHelper dbHelper = new DbHelper(getContext());
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         Cursor c = db.rawQuery("SELECT * FROM " + StatusContract.TABLE_DISH, null);
         dishList.clear();
