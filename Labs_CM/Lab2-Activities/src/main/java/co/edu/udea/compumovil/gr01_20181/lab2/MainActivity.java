@@ -1,26 +1,34 @@
 package co.edu.udea.compumovil.gr01_20181.lab2;
 
+import android.app.SearchManager;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.support.v7.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.SearchView.OnQueryTextListener;
+import android.support.v4.view.MenuItemCompat.OnActionExpandListener;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -30,7 +38,7 @@ import co.edu.udea.compumovil.gr01_20181.lab2.DB.HomeFragment;
 import co.edu.udea.compumovil.gr01_20181.lab2.DB.StatusContract;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, OnQueryTextListener, MenuItem.OnActionExpandListener {
 
     private FloatingActionButton fabDish, fabDrink;
     private FloatingActionMenu fabFloatingActionMenu;
@@ -49,7 +57,16 @@ public class MainActivity extends AppCompatActivity
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_others, menu);
         menu.getItem(1).setVisible(false);
-        return true;
+
+        MenuItem searchItem = menu.findItem(R.id.app_bar_search);
+
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+        searchView.setOnQueryTextListener(this);
+
+        searchItem.setOnActionExpandListener(this);
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -250,6 +267,41 @@ public class MainActivity extends AppCompatActivity
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putString(StatusContract.Column_User.MAIL,mail);
         savedInstanceState.putString(StatusContract.Column_User.NAME,name);
+
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.menu);
+
+        if(fragment instanceof DishesFragment){
+            ((DishesFragment) fragment).filter(s);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onMenuItemActionExpand(MenuItem item) {
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemActionCollapse(MenuItem item) {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.menu);
+
+        if(fragment instanceof DishesFragment){
+            ((DishesFragment) fragment).restart();
+        }
+        return true;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
 }

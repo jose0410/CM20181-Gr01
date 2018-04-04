@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
@@ -76,8 +77,6 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
         @Override
         public void onClick(View view) {
             int pos = getAdapterPosition();
-            Log.d("AdapterRecyclerView", "onClick: " + pos + "  Name: "+ dishName.getText() );
-            Toast.makeText(itemView.getContext(), "Hello: "+ dishName.getText()+ "onClick: " + pos , Toast.LENGTH_SHORT).show();
             showPickerDialog(view);
         }
 

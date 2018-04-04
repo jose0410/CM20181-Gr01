@@ -56,13 +56,22 @@ public class DbHelper extends SQLiteOpenHelper {
         imageBitmap = BitmapFactory.decodeResource(c.getResources(), R.drawable.papas);
         DishStructure dishStructure = new DishStructure("CLÁSICA","Mañana","12.000","15:00 min", ImageCodeClass.encodeToBase64(imageBitmap),"PAN AJONJOLÍ , 150 GRS DE CARNE 100% RES A LA PARRILLA, LECHUGA, TOMATE Y CEBOLLA. ");
         db.insert(StatusContract.TABLE_DISH, null, dishStructure.toContentValues());
+
         imageBitmap = BitmapFactory.decodeResource(c.getResources(), R.drawable.papas);
         dishStructure = new DishStructure("BURGER SALAD","Mañana","10.000","10:00 min",ImageCodeClass.encodeToBase64(imageBitmap),"Ensalada de lechugas frescas con carne a la parrilla, tomates marinados, cebollas de la casa, queso parmesano, cebolla puerro, champiñones y papas chips.");
         db.insert(StatusContract.TABLE_DISH, null, dishStructure.toContentValues());
+
         imageBitmap = BitmapFactory.decodeResource(c.getResources(), R.drawable.papas);
         dishStructure = new DishStructure("PAPAS AMERICANAS","Mañana","15.000","11:00 min",ImageCodeClass.encodeToBase64(imageBitmap),"Papas a la francesa, bañadas en queso cheddar fundido acompañadas de tomates marinados y tocineta finamente picados, cebollin y sour cream");
         db.insert(StatusContract.TABLE_DISH, null, dishStructure.toContentValues());
 
+        imageBitmap = BitmapFactory.decodeResource(c.getResources(), R.drawable.burger);
+        dishStructure = new DishStructure("BURGER","Afternoon","9.000","30:00 min",ImageCodeClass.encodeToBase64(imageBitmap),"Pan Integral, con queso cheddar fundido, cebolla, lechuga y papas fritas en ripio y con doble carne");
+        db.insert(StatusContract.TABLE_DISH, null, dishStructure.toContentValues());
+
+        imageBitmap = BitmapFactory.decodeResource(c.getResources(), R.drawable.papas_francesas);
+        dishStructure = new DishStructure("PAPAS FRANCESAS","Evening","13.000","18:00 min",ImageCodeClass.encodeToBase64(imageBitmap),"Papas acompañadas de queso cheddar derretido y tocineta");
+        db.insert(StatusContract.TABLE_DISH, null, dishStructure.toContentValues());
 
 
     }

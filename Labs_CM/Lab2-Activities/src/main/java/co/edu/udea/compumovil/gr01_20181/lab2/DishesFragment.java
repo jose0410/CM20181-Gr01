@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -30,7 +31,9 @@ public class DishesFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private List<DishStructure> dishList;
-
+    private AdapterRecycleView adapter;
+    private DbHelper dbHelper;
+    private SQLiteDatabase db;
 
 
     public DishesFragment() {
@@ -48,7 +51,7 @@ public class DishesFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        AdapterRecycleView adapter = new AdapterRecycleView(dishList);
+        adapter = new AdapterRecycleView(dishList);
         mRecyclerView.setAdapter(adapter);
         return view;
     }
@@ -56,8 +59,8 @@ public class DishesFragment extends Fragment {
     private void initializeDataPersons(View view){
         dishList = new ArrayList<>();
 
-        DbHelper dbHelper = new DbHelper(getContext());
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        dbHelper = new DbHelper(getContext());
+        db = dbHelper.getReadableDatabase();
 
         Cursor c = db.rawQuery("SELECT * FROM " + StatusContract.TABLE_DISH , null);
 
@@ -71,6 +74,45 @@ public class DishesFragment extends Fragment {
         db.close();
 
 
+    }
+
+    public void restart(){
+
+        dbHelper = new DbHelper(getContext());
+        db = dbHelper.getReadableDatabase();
+
+        Cursor c = db.rawQuery("SELECT * FROM " + StatusContract.TABLE_DISH, null);
+        dishList.clear();
+        if(c.moveToFirst()) {
+            do {
+                dishList.add(new DishStructure(c.getString(1), c.getString(2), c.getString(3), c.getString(4), c.getString(6), c.getString(5)));
+            } while (c.moveToNext());
+        }
+        db.close();
+
+        adapter.notifyDataSetChanged();
+    }
+
+
+    public void filter(String filter){
+
+        dbHelper = new DbHelper(getContext());
+        db = dbHelper.getReadableDatabase();
+
+        Cursor c = db.rawQuery("SELECT * FROM " + StatusContract.TABLE_DISH + " WHERE " +
+                StatusContract.Column_Dish.NAME + " LIKE '%" + filter + "%' OR "
+                + StatusContract.Column_Dish.PRICE + " LIKE '" + filter + "%'" , null);
+        dishList.clear();
+        if(c.moveToFirst()) {
+            do {
+                dishList.add(new DishStructure(c.getString(1), c.getString(2), c.getString(3), c.getString(4), c.getString(6), c.getString(5)));
+            } while (c.moveToNext());
+        }else{
+            Toast.makeText(getContext(), "No existen datos con ese nombre o precio" , Toast.LENGTH_SHORT).show();
+        }
+        db.close();
+
+        adapter.notifyDataSetChanged();
     }
 
 }
