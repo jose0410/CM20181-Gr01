@@ -17,6 +17,7 @@ public class StatusContract {
         public static final String MAIL = "mail";
         public static final String PICTURE = "picture";
         public static final String STATE = "state";
+        public static final String SESSION = "session";
     }
     public class Column_Dish {
         public static final String ID = BaseColumns._ID;

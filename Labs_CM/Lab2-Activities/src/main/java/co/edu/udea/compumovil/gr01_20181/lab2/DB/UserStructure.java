@@ -5,7 +5,7 @@ import android.content.ContentValues;
 
 public class UserStructure {
 
-    private String name, user, password, mail, state, picture;
+    private String name, user, password, mail, state, picture, sesion;
 
 
     public UserStructure(String name, String user, String password, String mail, String picture) {
@@ -15,6 +15,7 @@ public class UserStructure {
         this.mail = mail;
         this.picture = picture;
         this.state = "INACTIVO";
+        this.sesion = "INACTIVO";
     }
     
     public ContentValues toContentValues() {
@@ -25,6 +26,7 @@ public class UserStructure {
         values.put(StatusContract.Column_User.MAIL, mail);
         values.put(StatusContract.Column_User.PICTURE, picture);
         values.put(StatusContract.Column_User.STATE, state);
+        values.put(StatusContract.Column_User.SESSION, sesion);
         return values;
     }
 

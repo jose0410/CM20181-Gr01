@@ -20,6 +20,13 @@
                     android:text=""/>
 
                 <EditTextPreference
+                    android:key="@string/namePref"
+                    android:title="@string/userName"
+                    android:summary="@string/userSettingsDescription"
+                    android:dialogTitle="@string/userName"
+                    android:text=""/>
+
+                <EditTextPreference
                     android:key="password"
                     android:title="@string/password"
                     android:summary="@string/passwordSettingsDescription"
@@ -46,6 +53,15 @@
             </PreferenceCategory>
 
         </PreferenceScreen>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/session">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="session"
+            android:title="@string/keep_session" />
 
     </PreferenceCategory>
 
