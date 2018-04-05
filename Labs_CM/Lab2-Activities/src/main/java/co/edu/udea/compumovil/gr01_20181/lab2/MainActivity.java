@@ -224,6 +224,11 @@ public class MainActivity extends AppCompatActivity
             case R.id.about:
                 namePTextView.setVisibility(View.GONE);
                 photoImageView.setVisibility(View.GONE);
+                FragmentTransaction ftr = getSupportFragmentManager().beginTransaction();
+                ftr.replace(R.id.menu, new aboutFragment());
+                ftr.commit();
+                fabFloatingActionMenu.hideMenu(true);
+
                 break;
 
 

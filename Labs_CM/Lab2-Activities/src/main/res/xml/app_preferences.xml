@@ -15,12 +15,12 @@
                 <EditTextPreference
                     android:key="user"
                     android:title="@string/userName"
-                    android:summary="@string/userSettingsDescription"
+                    android:summary="@string/nameSettingsDescription"
                     android:dialogTitle="@string/userName"
                     android:text=""/>
 
                 <EditTextPreference
-                    android:key="@string/namePref"
+                    android:key="name"
                     android:title="@string/userName"
                     android:summary="@string/userSettingsDescription"
                     android:dialogTitle="@string/userName"

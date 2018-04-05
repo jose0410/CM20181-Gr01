@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="co.edu.udea.compumovil.gr01_20181.lab2.LogupFragment">
 
     <ScrollView
@@ -98,7 +99,7 @@
                     android:adjustViewBounds="false"
                     android:onClick="photoGallery"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_camera"
+                    app:srcCompat="@drawable/ic_camera" 
                     tools:ignore="OnClick" />
 
             </LinearLayout>

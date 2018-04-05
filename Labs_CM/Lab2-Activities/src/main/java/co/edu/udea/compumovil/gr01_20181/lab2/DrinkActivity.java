@@ -123,9 +123,9 @@ public class DrinkActivity extends AppCompatActivity implements View.OnClickList
 
     public boolean check() {
         return (((nameDrinkEditText.getText()).toString().equals("")) ||
-                ((priceDrinkEditText.getText()).equals("")) ||
+                ((priceDrinkEditText.getText()).toString().equals("")) ||
                 ((ingredientsDrinkEditText.getText()).toString().equals("")) ||
-                (imageUri == null));
+                (photoBitmap == null));
     }
 
     public void onImageGalleryClicked(View view) {

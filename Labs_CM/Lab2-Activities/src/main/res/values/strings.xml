@@ -73,5 +73,14 @@
     <string name="namePref">name</string>
     <string name="keep_session">Keep Session</string>
     <string name="session">Session</string>
+    <string name="dishes">Dishes</string>
+    <string name="drinks">Drinks</string>
+    <string name="others">Others</string>
+    <string name="configuration">Configuration</string>
+    <string name="log_out">Log Out</string>
+    <string name="about_">about</string>
+    <string name="user_">User:</string>
+    <string name="email_">Email:</string>
+    <string name="nameSettingsDescription">Change user you use</string>
 
 </resources>
