@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/settings">
+
+        <PreferenceScreen
+            android:key="screen_preference"
+            android:summary="@string/profileSettingsDescription"
+            android:title="@string/profile"
+            >
+
+            <!-- You can place more preferences here that will be shown on the next screen. -->
+
+            <PreferenceCategory android:title="Profile">
+
+                <EditTextPreference
+                    android:key="user"
+                    android:title="@string/userName"
+                    android:summary="@string/nameSettingsDescription"
+                    android:dialogTitle="@string/userName"
+                    android:text=""/>
+
+                <EditTextPreference
+                    android:key="name"
+                    android:title="@string/userName"
+                    android:summary="@string/userSettingsDescription"
+                    android:dialogTitle="@string/userName"
+                    android:text=""/>
+
+                <EditTextPreference
+                    android:key="password"
+                    android:title="@string/password"
+                    android:summary="@string/passwordSettingsDescription"
+                    android:dialogTitle="@string/password"
+                    android:text=""/>
+
+                <EditTextPreference
+                    android:key="mail"
+                    android:title="@string/email"
+                    android:summary="@string/emailSettingsDescription"
+                    android:dialogTitle="@string/email"
+                    android:text=""/>
+
+
+                <Preference
+                    android:key="photo"
+                    android:layout="@layout/profile_preference_photo"
+                    android:order="4"
+                    android:summary="@string/photoSettingsDescription"
+                    android:title="Setting"></Preference>
+
+
+
+            </PreferenceCategory>
+
+        </PreferenceScreen>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/session">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="session"
+            android:title="@string/keep_session" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/notifications">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="notificationsEnable"
+            android:summary="@string/notificationCheck"
+            android:title="@string/notificationsAuthorization" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="notificationsSoundEnable"
+            android:summary="@string/notificationSoundCheck"
+            android:title="@string/notificationsSoundAuthorization" />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

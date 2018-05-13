@@ -1,0 +1,86 @@
+<resources>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="user">User</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="log_up">Log Up</string>
+    <string name="photoBitmap">Photo:</string>
+    <string name="log_in">Log In</string>
+    <string name="logupS">Log up succesfully</string>
+    <string name="addMenu">Add</string>
+    <string name="addDish">Add Dish</string>
+    <string name="addDrink">Add Drink</string>
+    <string name="app_name">CHEF BURGER</string>
+    <string name="header_description">Chef Burger</string>
+    <string name="about">The 8th August of 2011 born CHEF BURGER COMPANY. Our goal is: ¡The Love for Burgers!</string>
+    <string name="title_activity_menu">Menu</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_dish">Dish</string>
+    <string name="title_activity_drink">Drink</string>
+    <string name="evening">Night</string>
+    <string name="afternoon">Afternoon</string>
+    <string name="morning">Morning</string>
+    <string name="nameDish">Name</string>
+    <string name="priceDish">Price</string>
+    <string name="ingredientsDish">Ingredients</string>
+    <string name="nameDrink">Name</string>
+    <string name="priceDrink">Price</string>
+    <string name="ingredientsDrink">Ingredients</string>
+    <string name="activityDishName">Dish</string>
+    <string name="activityDrinkName">Drink</string>
+    <string name="tagSchedule">Schedule</string>
+    <string name="change">Change</string>
+    <string name="tagDuration">Duration</string>
+    <string name="duration">Time of preparation</string>
+    <string name="save">Save</string>
+    <string name="exit">Exit</string>
+    <string name="clear">Clear</string>
+
+    <string name="_morning"> Morning</string>
+    <string name="_evening"> Evening</string>
+    <string name="_afternoon"> Afternoon</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="detail">Details</string>
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
+    <string name="profile">Profile</string>
+    <string name="profileSettingsDescription">Change the profile configurations</string>
+    <string name="notifications">Notifications</string>
+    <string name="notificationsAuthorization">Notifications Enabled</string>
+    <string name="notificationCheck">Enable the Notifications</string>
+    <string name="notificationSoundCheck">Enable the sound of the Notificaations</string>
+    <string name="notificationsSoundAuthorization">Notifications Sound</string>
+    <string name="unable">Unable to open image</string>
+    <string name="userSettingsDescription">Change the name you use</string>
+    <string name="userName">Name</string>
+    <string name="passwordSettingsDescription">Change the password you use</string>
+    <string name="emailSettingsDescription">Change the email you use</string>
+    <string name="photoDescription">Change the photo you use</string>
+    <string name="photoSettingsDescription">Change the Photo you use</string>
+    <string name="saveButtonSettingsDescription">Save all changes you did</string>
+    <string name="apply">Apply</string>
+    <string name="applyBtnSettings">Apply</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Search</string>
+    <string name="namePref">name</string>
+    <string name="keep_session">Keep Session</string>
+    <string name="session">Session</string>
+    <string name="dishes">Dishes</string>
+    <string name="drinks">Drinks</string>
+    <string name="others">Others</string>
+    <string name="configuration">Configuration</string>
+    <string name="log_out">Log Out</string>
+    <string name="about_">about</string>
+    <string name="user_">User:</string>
+    <string name="email_">Email:</string>
+    <string name="nameSettingsDescription">Change user you use</string>
+
+</resources>

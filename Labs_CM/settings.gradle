@@ -1,1 +1,1 @@
-include ':Lab1-UI', ':Lab2-Activities'
+include ':Lab1-UI', ':Lab2-Activities', ':Lab3-Services'

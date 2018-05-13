@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Configuraciones</string>
+    <string name="user">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="name">Nombre</string>
+    <string name="email">Email</string>
+    <string name="log_up">Registrarse</string>
+    <string name="photoBitmap">Foto:</string>
+    <string name="log_in">Iniciar Sesión</string>
+    <string name="logupS">Registro Exitoso</string>
+    <string name="addMenu">Agregar</string>
+    <string name="addDish">Agregar Plato</string>
+    <string name="addDrink">Agregar Bebida</string>
+    <string name="app_name">CHEF BURGER</string>
+    <string name="header_description">Chef Burger</string>
+    <string name="about">The 8th August of 2011 born CHEF BURGER COMPANY. Our goal is: ¡The Love for Burgers!</string>
+    <string name="title_activity_menu">Menu</string>
+    <string name="title_home">Menu Principal</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notificaciones</string>
+    <string name="title_activity_dish">Plato</string>
+    <string name="title_activity_drink">Bebida</string>
+    <string name="evening">Noche</string>
+    <string name="afternoon">Tarde</string>
+    <string name="morning">Mañana</string>
+    <string name="nameDish">Nombre</string>
+    <string name="priceDish">Precio</string>
+    <string name="ingredientsDish">Ingredientes</string>
+    <string name="nameDrink">Nombre</string>
+    <string name="priceDrink">Precio</string>
+    <string name="ingredientsDrink">Ingredientes</string>
+    <string name="activityDishName">Plato</string>
+    <string name="activityDrinkName">Bebida</string>
+    <string name="tagSchedule">Horario</string>
+    <string name="change">Cambiar</string>
+    <string name="tagDuration">Duración</string>
+    <string name="duration">Tiempo de Preparación</string>
+    <string name="save">Guardar</string>
+    <string name="exit">Salir</string>
+    <string name="clear">Limpiar</string>
+
+    <string name="_morning"> Mañana</string>
+    <string name="_evening"> Noche</string>
+    <string name="_afternoon"> Tarde</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="detail">Detalles</string>
+    <string name="home">Actividad Principal</string>
+    <string name="settings">Configuraciones</string>
+    <string name="profile">Perfil</string>
+    <string name="profileSettingsDescription">Cambiar las configuraciones del Perfil</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="notificationsAuthorization">Notificaciones Activadas</string>
+    <string name="notificationCheck">Activar las notificaciones</string>
+    <string name="notificationSoundCheck">Activar el sonido</string>
+    <string name="notificationsSoundAuthorization">Sonido Activado</string>
+    <string name="unable">Imposible abrir imagen</string>
+    <string name="userSettingsDescription">Cambia el nombre de usuario</string>
+    <string name="userName">Nombre</string>
+    <string name="passwordSettingsDescription">Cambia la contraseña</string>
+    <string name="emailSettingsDescription">Cambia el email</string>
+    <string name="photoDescription">Cambia la foto</string>
+    <string name="photoSettingsDescription">Cambia la foto</string>
+    <string name="saveButtonSettingsDescription">Guardar los cambios</string>
+    <string name="apply">Aplicar</string>
+    <string name="applyBtnSettings">Aplicar</string>
+    <string name="search">Buscar</string>
+    <string name="search_hint">Buscar</string>
+    <string name="keep_session">Mantener Sesión</string>
+    <string name="session">Sesión</string>
+    <string name="dishes">Platos</string>
+    <string name="drinks">Bebidas</string>
+    <string name="others">Otros</string>
+    <string name="configuration">Configuración</string>
+    <string name="log_out">Cerrar Sesión</string>
+    <string name="about_">Acerca de</string>
+    <string name="user_">Usuario:</string>
+    <string name="email_">Email:</string>
+    <string name="nameSettingsDescription">Cambia el usuario</string>
+
+</resources>
