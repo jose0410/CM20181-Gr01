@@ -2,7 +2,10 @@ package com.udea.edu.compmovil.RestService.controller;
 
 import com.udea.edu.compmovil.RestService.exception.ResourceNotFoundException;
 import com.udea.edu.compmovil.RestService.model.Dish;
+import com.udea.edu.compmovil.RestService.model.Drink;
 import com.udea.edu.compmovil.RestService.repository.DishRepository;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +14,16 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Integer.parseInt;
+
 @RestController
 @RequestMapping("/api")
 public class DishController {
     @Autowired
     DishRepository dishRepository;
+
+    private Dish dish;
+    private JSONObject jsonObjectDish;
 
 
     @GetMapping("/allDishes")
@@ -30,8 +38,21 @@ public class DishController {
     }
 
     @PostMapping("/dish")
-    public Dish createDish(@Valid @RequestBody Dish dish) {
-        return this.dishRepository.save(dish);
+    public String createDish(@Valid @RequestBody String dish) throws JSONException {
+        jsonObjectDish = new JSONObject(dish);
+        this.dish = new Dish();
+
+        this.dish.setId(parseInt(jsonObjectDish.getString("id")));
+        this.dish.setName(jsonObjectDish.getString("name"));
+        this.dish.setPicture(jsonObjectDish.getString("picture"));
+        this.dish.setPrice(jsonObjectDish.getString("price"));
+        this.dish.setDuration(jsonObjectDish.getString("duration"));
+        this.dish.setType(jsonObjectDish.getString("type"));
+        this.dish.setIngredients(jsonObjectDish.getString("ingredients"));
+
+        this.dishRepository.save(this.dish);
+
+        return "{'msg':'Dish added'}";
     }
 
     @GetMapping("/dish/{id}")
@@ -40,7 +61,7 @@ public class DishController {
                 .orElseThrow(() -> new ResourceNotFoundException("Dish", "id", dishId));
     }
 
-    @PutMapping("/dish/{id}")
+    @PutMapping("/updatedish/{id}")
     public Dish updateDish(@PathVariable(value = "id") Long dishId,
                              @Valid @RequestBody Dish dishDetails) {
 
@@ -58,7 +79,7 @@ public class DishController {
         return updatedDish;
     }
 
-    @DeleteMapping("/dish/{id}")
+    @DeleteMapping("/deletedish/{id}")
     public ResponseEntity<?> deleteDish(@PathVariable(value = "id") Long dishId) {
         Dish dish = this.dishRepository.findById(dishId)
                 .orElseThrow(() -> new ResourceNotFoundException("Dish", "id", dishId));

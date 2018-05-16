@@ -5,9 +5,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,11 +18,26 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Objects;
+import java.util.Random;
+
 
 public class DrinkActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final int IMAGE_GALLERY_REQUEST = 20;
     public static final int EXTRAS_CODE = 1;
+
+    private static String URL = "http://192.168.0.11:8080/api/drink";
     private ImageView photoDrinkImageView;
     private EditText nameDrinkEditText;
     private Toolbar myToolbar;
@@ -72,20 +89,53 @@ public class DrinkActivity extends AppCompatActivity implements View.OnClickList
             ingredients = ingredientsDrinkEditText.getText().toString();
             photo = ImageCodeClass.encodeToBase64(photoBitmap);
 
-            /*DbHelper dbHelper = new DbHelper(this);
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-            DrinkStructure drinkDb = new DrinkStructure(name, price, photo, ingredients);
+            /*DrinkStructure drinkDb = new DrinkStructure(name, price, photo, ingredients);
             Snackbar.make(view, R.string.logupS, Snackbar.LENGTH_SHORT).show();
             db.insert(StatusContract.TABLE_DRINK, null, drinkDb.toContentValues());*/
 
-            photoDrinkImageView.setImageResource(R.drawable.ic_camera);
-            nameDrinkEditText.setText("");
-            priceDrinkEditText.setText("");
-            ingredientsDrinkEditText.setText("");
+            JSONObject requestInfo = new JSONObject();
+            try {
+                Random randomGenerator = new Random();
+                requestInfo.put("id",randomGenerator.nextInt(1000000000));
+                requestInfo.put("name",name);
+                requestInfo.put("price",price);
+                requestInfo.put("ingredients", ingredients);
+                requestInfo.put("picture", photo);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,URL,requestInfo, new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        if (response.getString("msg").equals("Drink added")) {
+                            Toast.makeText(getApplicationContext(), response.getString("msg"), Toast.LENGTH_LONG).show();
+                            photoDrinkImageView.setImageResource(R.drawable.ic_camera);
+                            nameDrinkEditText.setText("");
+                            priceDrinkEditText.setText("");
+                            ingredientsDrinkEditText.setText("");
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Can't Register", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    Toast.makeText(getApplicationContext(), "Some error occurred -> " + volleyError, Toast.LENGTH_LONG).show();
+                    volleyError.printStackTrace();
+                }
+            });
+            RequestQueue rQueue = Volley.newRequestQueue(getApplicationContext());
+            rQueue.add(request);
 
         } else {
-            Toast.makeText(getApplicationContext(), "Información Incompleta", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Information Incomplet", Toast.LENGTH_SHORT).show();
 
         }
     }

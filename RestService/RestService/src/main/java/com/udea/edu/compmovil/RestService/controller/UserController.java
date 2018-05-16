@@ -54,7 +54,7 @@ public class UserController {
 
         this.userRepository.save(this.user);
 
-        return "{'msg':'Registro exitoso'}";
+        return "{'msg':'Register successful'}";
     }
 
     @GetMapping("/user/{user}")
@@ -78,7 +78,7 @@ public class UserController {
         return "{'msg':'User/Password is incorrect'}";
     }
 
-    /*@PutMapping("/user/{user}")
+    @PutMapping("/updateuser/{user}")
     public User updateUser(@PathVariable(value = "user") String user,
                            @Valid @RequestBody User userDetails) {
 
@@ -94,13 +94,13 @@ public class UserController {
 
         User updatedUser = userRepository.save(userNote);
         return updatedUser;
-    }*/
+    }
 
-    @DeleteMapping("/user/{user}")
+    @DeleteMapping("/deleteuser/{user}")
     public ResponseEntity<?> deleteUser(@PathVariable(value = "user") String user) {
-        //User userNote = this.userRepository.findByPk(user);
+        User userNote = this.userRepository.findByPk(user);
 
-        //this.userRepository.delete(userNote);
+        this.userRepository.delete(userNote);
 
         return ResponseEntity.ok().build();
     }

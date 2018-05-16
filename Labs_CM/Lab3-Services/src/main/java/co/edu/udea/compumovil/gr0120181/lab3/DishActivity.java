@@ -23,12 +23,26 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Random;
+
 
 public class DishActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     public static final int IMAGE_GALLERY_REQUEST = 20;
     public static final int EXTRAS_CODE = 1;
+
+    private static String URL = "http://192.168.0.11:8080/api/dish";
     private ImageView photoImageView;
     private EditText nameDishEditText;
     private EditText priceDishEditText;
@@ -101,6 +115,47 @@ public class DishActivity extends AppCompatActivity implements View.OnClickListe
             if(afternoonCheckBox.isChecked()){
                 type += getString(R.string._afternoon);
             }
+
+            JSONObject requestInfo = new JSONObject();
+            try {
+                Random randomGenerator = new Random();
+                requestInfo.put("id",randomGenerator.nextInt(1000000000));
+                requestInfo.put("name",name);
+                requestInfo.put("duration",duration);
+                requestInfo.put("type",type);
+                requestInfo.put("price",price);
+                requestInfo.put("ingredients", ingredients);
+                requestInfo.put("picture", photo);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,URL,requestInfo, new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        if (response.getString("msg").equals("Dish added")) {
+                            Toast.makeText(getApplicationContext(), response.getString("msg"), Toast.LENGTH_LONG).show();
+                            clear();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Can't Register", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    Toast.makeText(getApplicationContext(), "Some error occurred -> " + volleyError, Toast.LENGTH_LONG).show();
+                    volleyError.printStackTrace();
+                }
+            });
+            RequestQueue rQueue = Volley.newRequestQueue(getApplicationContext());
+            rQueue.add(request);
+
             /*DbHelper dbHelper = new DbHelper(this);
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             DishStructure dishDb = new DishStructure(name, type, price, duration, photo, ingredients);

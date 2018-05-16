@@ -108,7 +108,7 @@ public class LogupFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onResponse(JSONObject response) {
                     try {
-                        if (Objects.equals(response.getString("msg"), "Registro exitoso")) {
+                        if (Objects.equals(response.getString("msg"), "Register successful")) {
                             Toast.makeText(getContext(), response.getString("msg"), Toast.LENGTH_LONG).show();
                             Fragment frag = new LoginFragment();
                             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,frag).commit();

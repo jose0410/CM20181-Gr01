@@ -35,7 +35,6 @@ public class DrinksFragment extends Fragment {
 
     private static String URL = "http://192.168.0.11:8080/api/drinks";
     private RecyclerView mRecyclerView;
-    //private List<DrinkStructure> drinkList;
     private AdapterRecycleViewDrink adapter;
     //private DbHelper dbHelper;
     private SQLiteDatabase db;
