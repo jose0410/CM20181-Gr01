@@ -1,10 +1,6 @@
 package co.edu.udea.compumovil.gr0120181.lab3;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -15,7 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -45,6 +40,8 @@ public class MainActivity extends AppCompatActivity
     private Toolbar toolbar;
     private String mail, name;
     private DrawerLayout drawer;
+    private Intent intent;
+    private JSONObject user;
     public static final int IMAGE_GALLERY_REQUEST = 20;
 
 
@@ -103,10 +100,10 @@ public class MainActivity extends AppCompatActivity
         if(getIntent().getExtras()!=null){
 
             Bundle bundle = getIntent().getExtras();
-            Intent intent = getIntent();
+            intent = getIntent();
 
             try {
-                JSONObject user = new JSONObject(intent.getStringExtra("User"));
+                user = new JSONObject(intent.getStringExtra("User"));
                 nameDrawer.setText(user.getString("name"));
 
             } catch (JSONException e) {
@@ -176,6 +173,21 @@ public class MainActivity extends AppCompatActivity
 
             case R.id.profile:
 
+                namePTextView.setVisibility(View.VISIBLE);
+                photoImageView.setVisibility(View.VISIBLE);
+
+                try {
+                    namePTextView.setText(user.getString("name"));
+                    photoImageView.setImageBitmap(ImageCodeClass.decodeBase64(user.getString("picture")));
+                    ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.menu, new ProfileFragment(user.getString("email"), user.getString("user")));
+                    ft.commit();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                fabFloatingActionMenu.hideMenu(true);
 
                 break;
 
