@@ -25,6 +25,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,7 +45,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private EditText userEditText, passwordEditText;
     private String user, pass;
     private CheckBox sesionCheckButton;
-
 
 
     public LoginFragment() {
@@ -77,30 +79,40 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.login:
-                StringRequest request;
+
                 try {
                     urlFinal = URL + java.net.URLEncoder.encode(userEditText.getText().toString(), "UTF-8");
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
-                request = new StringRequest(Request.Method.GET, urlFinal , new Response.Listener<String>(){
+                StringRequest request = new StringRequest(Request.Method.GET, urlFinal, new Response.Listener<String>() {
 
                     @Override
                     public void onResponse(String s) {
+                        if (!s.equals("{'msg':'User/Password is incorrect'}")) {
+                            JSONObject user;
+                            try {
+                                user = new JSONObject(s);
+                                if (user.getString("password").equals(passwordEditText.getText().toString())) {
+                                    Toast.makeText(getContext(), "Login Successful", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(getContext(), MainActivity.class);
+                                    intent.putExtra("User", user.toString());
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(getContext(), "User/Password is incorrect", Toast.LENGTH_LONG).show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            Toast.makeText(getContext(), "User/Password is incorrect", Toast.LENGTH_LONG).show();
+                        }
 
-                        if(!s.equals("")){
-                            Toast.makeText(getContext(), "Login Successful", Toast.LENGTH_LONG).show();
-                            Log.d("RESPUESTA ",s);
-                            startActivity(new Intent(getContext(),MainActivity.class));
-                        }
-                        else{
-                            Toast.makeText(getContext(), "Incorrect Details", Toast.LENGTH_LONG).show();
-                        }
                     }
-                },new Response.ErrorListener(){
+                }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Toast.makeText(getContext(), "Some error occurred -> "+volleyError, Toast.LENGTH_LONG).show();;
+                        Toast.makeText(getContext(), "Some error occurred -> " + volleyError, Toast.LENGTH_LONG).show();
                     }
                 }) {
                     @Override
@@ -118,13 +130,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
 
 
-
     }
 
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putString("user",user);
-        savedInstanceState.putString("pass",pass);
+        savedInstanceState.putString("user", user);
+        savedInstanceState.putString("pass", pass);
 
     }
 

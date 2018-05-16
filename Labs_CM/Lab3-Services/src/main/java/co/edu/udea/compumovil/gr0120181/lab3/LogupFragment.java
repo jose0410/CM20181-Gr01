@@ -35,6 +35,9 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+
+import co.edu.udea.compumovil.gr0120181.lab3.models.UserStructure;
 
 
 /**
@@ -42,7 +45,7 @@ import java.util.Map;
  */
 public class LogupFragment extends Fragment implements View.OnClickListener {
 
-    private static String URL = "http://192.168.137.1:8080/api/user";
+    private static String URL = "http://192.168.0.11:8080/api/user";
     private JSONObject jsonObject;
 
     private Button logupButton;
@@ -63,7 +66,7 @@ public class LogupFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_log_up, container, false);
 
         userPhoto = view.findViewById(R.id.photoUser);
-        logupButton = (Button) view.findViewById(R.id.logupButton);
+        logupButton = view.findViewById(R.id.logupButton);
         logupButton.setOnClickListener(this);
         return view;
     }
@@ -71,7 +74,6 @@ public class LogupFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         EditText editTextName, editTextUser, editTextMail, editTextPassword;
-        ImageView imageViewPhoto;
         final String name, user, mail, password, photo;
 
         editTextName = getView().findViewById(R.id.userNameLogup);
@@ -101,15 +103,20 @@ public class LogupFragment extends Fragment implements View.OnClickListener {
 
             jsonObject = new JSONObject(parameters);
 
-            JsonArrayRequest request = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,URL,jsonObject, new Response.Listener<JSONObject>() {
 
                 @Override
-                public void onResponse(JSONArray response) {
-                    Log.d("RESPONSE:", response.toString());
-                    if (!response.equals("")) {
-                        Toast.makeText(getContext(), "Registration Successful", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getContext(), "Can't Register", Toast.LENGTH_LONG).show();
+                public void onResponse(JSONObject response) {
+                    try {
+                        if (Objects.equals(response.getString("msg"), "Registro exitoso")) {
+                            Toast.makeText(getContext(), response.getString("msg"), Toast.LENGTH_LONG).show();
+                            Fragment frag = new LoginFragment();
+                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,frag).commit();
+                        } else {
+                            Toast.makeText(getContext(), "Can't Register", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 }
             }, new Response.ErrorListener() {
@@ -132,14 +139,8 @@ public class LogupFragment extends Fragment implements View.OnClickListener {
                 public String getBodyContentType() {
                     return "application/json; charset=utf-8";
                 }
-
-                @Override
-                public Map<String, String> getParams() {
-                    return parameters;
-                }
             };
 
-            request.setShouldCache(false);
             RequestQueue rQueue = Volley.newRequestQueue(getContext());
             rQueue.add(request);
         }
