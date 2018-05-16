@@ -15,13 +15,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v7.widget.RecyclerView.Adapter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-/*
+
 public class AdapterRecycleView extends Adapter<AdapterRecycleView.DishViewHolder> {
 
-    public List<DishStructure> dishes;
+    public JSONArray dishes;
 
-    public AdapterRecycleView(List<DishStructure> dishes) {
+    public AdapterRecycleView(JSONArray dishes) {
         this.dishes = dishes;
     }
 
@@ -36,15 +39,19 @@ public class AdapterRecycleView extends Adapter<AdapterRecycleView.DishViewHolde
 
     @Override
     public void onBindViewHolder(DishViewHolder holder, int pos) {
-
-        holder.dishName.setText(dishes.get(pos).getName());
-        holder.dishPrice.setText(dishes.get(pos).getPrice());
-        holder.dishPhoto.setImageBitmap(ImageCodeClass.decodeBase64(dishes.get(pos).getPicture()));
+        try {
+            JSONObject dish = new JSONObject(dishes.getString(pos));
+            holder.dishName.setText(dish.getString("name"));
+            holder.dishPrice.setText(dish.getString("price"));
+            holder.dishPhoto.setImageBitmap(ImageCodeClass.decodeBase64(dish.getString("picture")));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public int getItemCount() {
-        return dishes.size();
+        return dishes.length();
     }
 
 
@@ -53,10 +60,10 @@ public class AdapterRecycleView extends Adapter<AdapterRecycleView.DishViewHolde
         public TextView dishName;
         public TextView dishPrice;
         public ImageView dishPhoto;
-        public List<DishStructure> dishes;
+        public JSONArray dishes;
 
 
-        DishViewHolder(View itemView, List<DishStructure> dishes) {
+        DishViewHolder(View itemView, JSONArray dishes) {
             super(itemView);
             itemView.setOnClickListener(this);
             cardView =  itemView.findViewById(R.id.card_view);
@@ -69,10 +76,15 @@ public class AdapterRecycleView extends Adapter<AdapterRecycleView.DishViewHolde
         @Override
         public void onClick(View view) {
             int pos = getAdapterPosition();
-            showPickerDialog(view);
+            try {
+                JSONObject dish = new JSONObject(dishes.getString(pos));
+                showPickerDialog(view,dish);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
-        public void showPickerDialog(View view) {
+        public void showPickerDialog(View view, JSONObject dish) throws JSONException {
             Context c = view.getContext();
             int pos = getAdapterPosition();
             TextView nameLoad,priceLoad,scheduleLoad,ingredientsLoad,durationLoad;
@@ -90,13 +102,14 @@ public class AdapterRecycleView extends Adapter<AdapterRecycleView.DishViewHolde
             imageLoad = v.findViewById(R.id.imageLoad);
             durationLoad = v.findViewById(R.id.durationLoad);
             scheduleLoad = v.findViewById(R.id.scheduleLoad);
-            priceLoad.setText(String.valueOf(dishes.get(pos).getPrice()));
-            ingredientsLoad.setText(dishes.get(pos).getIngredients());
-            imageLoad.setImageBitmap(ImageCodeClass.decodeBase64(dishes.get(pos).getPicture()));
-            scheduleLoad.setText(dishes.get(pos).getType());
-            durationLoad.setText(dishes.get(pos).getDuration());
+
+            priceLoad.setText(String.valueOf(dish.getString("price")));
+            ingredientsLoad.setText(dish.getString("ingredients"));
+            imageLoad.setImageBitmap(ImageCodeClass.decodeBase64(dish.getString("picture")));
+            scheduleLoad.setText(dish.getString("type"));
+            durationLoad.setText(dish.getString("duration"));
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(c);
-            alertDialogBuilder.setTitle(dishes.get(pos).getName());
+            alertDialogBuilder.setTitle(dish.getString("name"));
             alertDialogBuilder.setView(layout);
             alertDialogBuilder
                     .setCancelable(false)
@@ -126,4 +139,4 @@ public class AdapterRecycleView extends Adapter<AdapterRecycleView.DishViewHolde
 
 
 
-}*/
+}

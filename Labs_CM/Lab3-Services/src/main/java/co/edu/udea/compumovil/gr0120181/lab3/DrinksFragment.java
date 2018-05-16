@@ -7,12 +7,21 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +33,10 @@ import java.util.List;
  */
 public class DrinksFragment extends Fragment {
 
+    private static String URL = "http://192.168.0.11:8080/api/drinks";
     private RecyclerView mRecyclerView;
     //private List<DrinkStructure> drinkList;
-    //private AdapterRecycleViewDrink adapter;
+    private AdapterRecycleViewDrink adapter;
     //private DbHelper dbHelper;
     private SQLiteDatabase db;
 
@@ -38,35 +48,30 @@ public class DrinksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_drinks, container, false);
-        initializeDataPersons(view);
 
         mRecyclerView = view.findViewById(R.id.rv_content);
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        //adapter = new AdapterRecycleViewDrink(drinkList);
-        //mRecyclerView.setAdapter(adapter);
+
+        JsonArrayRequest request = new JsonArrayRequest( URL, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray s) {
+                adapter = new AdapterRecycleViewDrink(s);
+                mRecyclerView.setAdapter(adapter);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(getContext(), "Some error occurred -> " + volleyError, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        RequestQueue rQueue = Volley.newRequestQueue(getContext());
+        rQueue.add(request);
+
         return view;
-    }
-
-    private void initializeDataPersons(View view){
-        /*drinkList = new ArrayList<>();
-
-        DbHelper dbHelper = new DbHelper(getContext());
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        Cursor c = db.rawQuery("SELECT * FROM " + StatusContract.TABLE_DRINK , null);
-
-        if(c.moveToFirst()) {
-            do {
-                drinkList.add(new DrinkStructure(c.getString(1), c.getString(2), c.getString(4), c.getString(3)));
-            } while (c.moveToNext());
-        }else{
-            Toast.makeText(view.getContext(), "no hay datos registrados" , Toast.LENGTH_SHORT).show();
-        }
-        db.close();*/
-
-
     }
 
     public void restart(){

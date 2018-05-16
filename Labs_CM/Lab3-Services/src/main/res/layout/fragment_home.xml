@@ -30,6 +30,7 @@
             app:layout_constraintVertical_weight="2" />
 
         <ImageView
+            android:id="@+id/logoPrueba"
             android:layout_width="271dp"
             android:layout_height="241dp"
             android:layout_marginEnd="8dp"

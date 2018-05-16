@@ -13,16 +13,20 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 /**
  * Created by user on 4/04/2018.
  */
 
-/*public class AdapterRecycleViewDrink extends RecyclerView.Adapter<AdapterRecycleViewDrink.DrinkViewHolder> {
+public class AdapterRecycleViewDrink extends RecyclerView.Adapter<AdapterRecycleViewDrink.DrinkViewHolder> {
 
-    public List<DrinkStructure> drinks;
+    public JSONArray drinks;
 
-    public AdapterRecycleViewDrink(List<DrinkStructure> drinks) {
+    public AdapterRecycleViewDrink(JSONArray drinks) {
         this.drinks = drinks;
     }
 
@@ -37,14 +41,19 @@ import android.widget.TextView;
 
     @Override
     public void onBindViewHolder(DrinkViewHolder holder, int pos) {
-        holder.drinkName.setText(drinks.get(pos).getName());
-        holder.drinkPrice.setText(drinks.get(pos).getPrice());
-        holder.drinkPhoto.setImageBitmap(ImageCodeClass.decodeBase64(drinks.get(pos).getPicture()));
+        try {
+            JSONObject dish = new JSONObject(drinks.getString(pos));
+            holder.drinkName.setText(dish.getString("name"));
+            holder.drinkPrice.setText(dish.getString("price"));
+            holder.drinkPhoto.setImageBitmap(ImageCodeClass.decodeBase64(dish.getString("picture")));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public int getItemCount() {
-        return drinks.size();
+        return drinks.length();
     }
 
     public static class DrinkViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -52,10 +61,10 @@ import android.widget.TextView;
         public TextView drinkName;
         public TextView drinkPrice;
         public ImageView drinkPhoto;
-        public List<DrinkStructure> drinks;
+        public JSONArray drinks;
 
 
-        DrinkViewHolder(View itemView, List<DrinkStructure> drinks) {
+        DrinkViewHolder(View itemView, JSONArray drinks) {
             super(itemView);
             itemView.setOnClickListener(this);
             cardView = itemView.findViewById(R.id.card_view);
@@ -68,10 +77,15 @@ import android.widget.TextView;
         @Override
         public void onClick(View view) {
             int pos = getAdapterPosition();
-            showPickerDialog(view);
+            try {
+                JSONObject drink = new JSONObject(drinks.getString(pos));
+                showPickerDialog(view,drink);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
-        public void showPickerDialog(View view) {
+        public void showPickerDialog(View view, JSONObject drink) throws JSONException {
             Context c = view.getContext();
             int pos = getAdapterPosition();
             TextView nameLoad, priceLoad, ingredientsLoad;
@@ -87,11 +101,11 @@ import android.widget.TextView;
             priceLoad = v.findViewById(R.id.priceLoad);
             ingredientsLoad = v.findViewById(R.id.ingredientsLoad);
             imageLoad = v.findViewById(R.id.imageLoad);
-            priceLoad.setText(String.valueOf(drinks.get(pos).getPrice()));
-            ingredientsLoad.setText(drinks.get(pos).getIngredients());
-            imageLoad.setImageBitmap(ImageCodeClass.decodeBase64(drinks.get(pos).getPicture()));
+            priceLoad.setText(String.valueOf(drink.getString("price")));
+            ingredientsLoad.setText(drink.getString("ingredients"));
+            imageLoad.setImageBitmap(ImageCodeClass.decodeBase64(drink.getString("picture")));
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(c);
-            alertDialogBuilder.setTitle(drinks.get(pos).getName());
+            alertDialogBuilder.setTitle(drink.getString("name"));
             alertDialogBuilder.setView(layout);
             alertDialogBuilder
                     .setCancelable(false)
@@ -117,5 +131,4 @@ import android.widget.TextView;
 
     }
 }
-*/
 

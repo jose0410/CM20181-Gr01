@@ -15,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,6 +30,9 @@ import android.support.v7.widget.SearchView.OnQueryTextListener;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, OnQueryTextListener, MenuItem.OnActionExpandListener {
 
@@ -37,7 +41,7 @@ public class MainActivity extends AppCompatActivity
     private NavigationView navigationView;
     private TextView nameDrawer, namePTextView;
     private FrameLayout frameLayout;
-    private ImageView photoImageView;
+    private ImageView photoImageView, photoUserNavBar;
     private Toolbar toolbar;
     private String mail, name;
     private DrawerLayout drawer;
@@ -84,8 +88,9 @@ public class MainActivity extends AppCompatActivity
         nameDrawer = findViewById(R.id.nameDrawer);
         photoImageView = findViewById(R.id.photoProfile);
         namePTextView = findViewById(R.id.nameProfile);
-        photoImageView = findViewById(R.id.photoProfile);frameLayout = findViewById(R.id.menu);
-
+        photoImageView = findViewById(R.id.photoProfile);
+        frameLayout = findViewById(R.id.menu);
+        photoUserNavBar = findViewById(R.id.photoUserNavBar);
 
 
         navigationView.setNavigationItemSelectedListener(this);
@@ -98,7 +103,16 @@ public class MainActivity extends AppCompatActivity
         if(getIntent().getExtras()!=null){
 
             Bundle bundle = getIntent().getExtras();
-            nameDrawer.setText(name);
+            Intent intent = getIntent();
+
+            try {
+                JSONObject user = new JSONObject(intent.getStringExtra("User"));
+                nameDrawer.setText(user.getString("name"));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
 
         FragmentTransaction ftr = getSupportFragmentManager().beginTransaction();
