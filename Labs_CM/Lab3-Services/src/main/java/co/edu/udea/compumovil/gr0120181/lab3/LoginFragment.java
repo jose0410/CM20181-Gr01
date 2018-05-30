@@ -38,11 +38,11 @@ import java.util.Map;
  */
 public class LoginFragment extends Fragment implements View.OnClickListener {
 
-    private static String URL = "http://192.168.0.11:8080/api/user/";
+    private static String URL = ":8080/api/user/";
     private String urlFinal;
 
     private Button loginButton, logupButton;
-    private EditText userEditText, passwordEditText;
+    private EditText userEditText, passwordEditText, ip;
     private String user, pass;
     private CheckBox sesionCheckButton;
 
@@ -58,6 +58,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
+        ip = view.findViewById(R.id.ipServerAddress);
         loginButton = view.findViewById(R.id.login);
         logupButton = view.findViewById(R.id.logup);
         userEditText = view.findViewById(R.id.user);
@@ -81,7 +82,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             case R.id.login:
 
                 try {
-                    urlFinal = URL + java.net.URLEncoder.encode(userEditText.getText().toString(), "UTF-8");
+
+                    urlFinal = "http://" + ip.getText() + URL + java.net.URLEncoder.encode(userEditText.getText().toString(), "UTF-8");
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
@@ -97,6 +99,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                     Toast.makeText(getContext(), "Login Successful", Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(getContext(), MainActivity.class);
                                     intent.putExtra("User", user.toString());
+                                    intent.putExtra("IP", "http://"+ip.getText().toString());
                                     startActivity(intent);
                                 } else {
                                     Toast.makeText(getContext(), "User/Password is incorrect", Toast.LENGTH_LONG).show();

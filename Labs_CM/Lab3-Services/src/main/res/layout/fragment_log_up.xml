@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="co.edu.udea.compumovil.gr01_20181.lab2.LogupFragment">
+    tools:context="co.edu.udea.compumovil.gr0120181.lab3.LogupFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,6 +15,19 @@
             android:orientation="vertical"
             android:padding="5dp"
             android:scrollbarAlwaysDrawVerticalTrack="true">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <EditText
+                    android:id="@+id/ipServer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/ipaddress"
+                    android:imeOptions="actionDone"
+                    android:inputType="textNoSuggestions"/>
+            </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"

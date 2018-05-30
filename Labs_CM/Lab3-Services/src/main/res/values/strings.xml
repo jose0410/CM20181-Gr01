@@ -82,5 +82,6 @@
     <string name="user_">User:</string>
     <string name="email_">Email:</string>
     <string name="nameSettingsDescription">Change user you use</string>
+    <string name="ipaddress">IP Server</string>
 
 </resources>

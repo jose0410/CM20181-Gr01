@@ -41,7 +41,7 @@ import java.util.Map;
  */
 public class DishesFragment extends Fragment {
 
-    private static String URL = "http://192.168.0.11:8080/api/dishes";
+    private static String URL = ":8080/api/dishes";
     private RecyclerView mRecyclerView;
     private AdapterRecycleView adapter;
     //private DbHelper dbHelper;
@@ -58,13 +58,12 @@ public class DishesFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_dishes, container, false);
 
-
         mRecyclerView = view.findViewById(R.id.rv_content);
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
-        JsonArrayRequest request = new JsonArrayRequest( URL, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest( getArguments().getString("IP")+ URL, new Response.Listener<JSONArray>() {
 
             @Override
             public void onResponse(JSONArray s) {

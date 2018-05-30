@@ -45,9 +45,9 @@ import co.edu.udea.compumovil.gr0120181.lab3.models.UserStructure;
  */
 public class LogupFragment extends Fragment implements View.OnClickListener {
 
-    private static String URL = "http://192.168.0.11:8080/api/user";
+    private static String URL = ":8080/api/user";
     private JSONObject jsonObject;
-
+    private EditText ip;
     private Button logupButton;
     private ImageView userPhoto;
     private Bitmap photoBitmap = null;
@@ -64,7 +64,7 @@ public class LogupFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_log_up, container, false);
-
+        ip = view.findViewById(R.id.ipServer);
         userPhoto = view.findViewById(R.id.photoUser);
         logupButton = view.findViewById(R.id.logupButton);
         logupButton.setOnClickListener(this);
@@ -103,7 +103,7 @@ public class LogupFragment extends Fragment implements View.OnClickListener {
 
             jsonObject = new JSONObject(parameters);
 
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,URL,jsonObject, new Response.Listener<JSONObject>() {
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,"http://" + ip.getText() +URL,jsonObject, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {
@@ -139,6 +139,7 @@ public class LogupFragment extends Fragment implements View.OnClickListener {
                 public String getBodyContentType() {
                     return "application/json; charset=utf-8";
                 }
+
             };
 
             RequestQueue rQueue = Volley.newRequestQueue(getContext());

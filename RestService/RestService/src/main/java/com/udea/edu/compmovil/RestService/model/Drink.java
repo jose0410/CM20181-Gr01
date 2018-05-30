@@ -15,7 +15,11 @@ public class Drink {
     private int id;
 
     @NotNull
-    private String name, price, ingredients, picture;
+    private String name, price, ingredients;
+
+    @NotNull
+    @Column(length = 100000)
+    private String picture;
 
     public int getId() {
         return id;

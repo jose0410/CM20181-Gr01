@@ -15,7 +15,11 @@ public class Dish {
     private int id;
 
     @NotNull
-    private String name, type, duration, ingredients, picture, price;
+    private String name, type, duration, ingredients, price;
+
+    @NotNull
+    @Column(length = 100000)
+    private String picture;
 
     public int getId() {
         return id;

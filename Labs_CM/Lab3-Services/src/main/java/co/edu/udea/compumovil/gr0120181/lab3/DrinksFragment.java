@@ -33,7 +33,8 @@ import java.util.List;
  */
 public class DrinksFragment extends Fragment {
 
-    private static String URL = "http://192.168.0.11:8080/api/drinks";
+    private static String URL = ":8080/api/drinks";
+    private static String URLFINAL = "";
     private RecyclerView mRecyclerView;
     private AdapterRecycleViewDrink adapter;
     //private DbHelper dbHelper;
@@ -53,7 +54,7 @@ public class DrinksFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
-        JsonArrayRequest request = new JsonArrayRequest( URL, new Response.Listener<JSONArray>() {
+        JsonArrayRequest request = new JsonArrayRequest( getArguments().getString("IP")+ URL, new Response.Listener<JSONArray>() {
 
             @Override
             public void onResponse(JSONArray s) {

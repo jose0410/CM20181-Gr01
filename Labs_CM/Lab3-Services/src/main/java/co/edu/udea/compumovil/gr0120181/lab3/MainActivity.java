@@ -1,6 +1,8 @@
 package co.edu.udea.compumovil.gr0120181.lab3;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,11 +25,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, OnQueryTextListener, MenuItem.OnActionExpandListener {
@@ -42,6 +57,11 @@ public class MainActivity extends AppCompatActivity
     private DrawerLayout drawer;
     private Intent intent;
     private JSONObject user;
+    private Bundle bundle;
+    private DishesFragment dishesFragment;
+    private DrinksFragment drinksFragment;
+    private static String URLphotoupdate = ":8080/api/updateuser/";
+    private static String URL = "";
     public static final int IMAGE_GALLERY_REQUEST = 20;
 
 
@@ -101,16 +121,28 @@ public class MainActivity extends AppCompatActivity
 
             Bundle bundle = getIntent().getExtras();
             intent = getIntent();
+            URLphotoupdate = intent.getStringExtra("IP") + URLphotoupdate;
 
             try {
                 user = new JSONObject(intent.getStringExtra("User"));
                 nameDrawer.setText(user.getString("name"));
 
+                URLphotoupdate += java.net.URLEncoder.encode(user.getString("user"), "UTF-8");
+                if(URL.equals("")){
+                    URL = intent.getStringExtra("IP") ;
+                }
             } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
 
         }
+        bundle = new Bundle();
+
+        bundle.putString("IP",URL);
+
+
 
         FragmentTransaction ftr = getSupportFragmentManager().beginTransaction();
         ftr.replace(R.id.menu, new HomeFragment());
@@ -136,6 +168,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         FragmentTransaction ft;
         frameLayout.removeAllViews();
+
         switch (item.getItemId()) {
             case R.id.menuP:
                 namePTextView.setVisibility(View.GONE);
@@ -151,8 +184,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.dishes:
                 namePTextView.setVisibility(View.GONE);
                 photoImageView.setVisibility(View.GONE);
+                dishesFragment =  new DishesFragment();
+                dishesFragment.setArguments(bundle);
                 ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.menu, new DishesFragment());
+                ft.replace(R.id.menu,dishesFragment);
                 ft.commit();
                 fabFloatingActionMenu.showMenu(true);
                 fabDish.setVisibility(View.VISIBLE);
@@ -163,8 +198,10 @@ public class MainActivity extends AppCompatActivity
 
                 namePTextView.setVisibility(View.GONE);
                 photoImageView.setVisibility(View.GONE);
+                drinksFragment = new DrinksFragment();
+                drinksFragment.setArguments(bundle);
                 FragmentTransaction ftr1 = getSupportFragmentManager().beginTransaction();
-                ftr1.replace(R.id.menu, new DrinksFragment());
+                ftr1.replace(R.id.menu, drinksFragment);
                 ftr1.commit();
                 fabFloatingActionMenu.showMenu(true);
                 fabDish.setVisibility(View.GONE);
@@ -192,31 +229,31 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.conf:
-                /*namePTextView.setVisibility(View.GONE);
+                namePTextView.setVisibility(View.GONE);
                 photoImageView.setVisibility(View.GONE);
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.menu, new ConfigFragment(new DbHelper(this)))
-                        .commit();
-                break;*/
+                try {
+                    ConfigFragment configFragment = new ConfigFragment(user);
+                    configFragment.setArguments(bundle);
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.menu, configFragment)
+                            .commit();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                break;
 
             case R.id.logout:
                 namePTextView.setVisibility(View.GONE);
                 photoImageView.setVisibility(View.GONE);
-/*
-                dbHelper = new DbHelper(getApplication().getApplicationContext());
-                db = dbHelper.getWritableDatabase();
-                ContentValues contentValues = new ContentValues();
-                contentValues.put(StatusContract.Column_User.STATE, "INACTIVO");
-                contentValues.put(StatusContract.Column_User.SESSION, "INACTIVO");
-                db.updateWithOnConflict(StatusContract.TABLE_USER, contentValues,
-                        StatusContract.Column_User.SESSION + "='ACTIVO'", null, SQLiteDatabase.CONFLICT_IGNORE);
-                db.close();
+
                 Intent other = new Intent(getApplication().getApplicationContext(), LoginActivity.class);
                 Bundle bundleP = new Bundle();
                 onSaveInstanceState(bundleP);
                 other.putExtras(bundleP);
                 finish();
-                startActivity(other);*/
+                startActivity(other);
 
 
                 break;
@@ -247,14 +284,12 @@ public class MainActivity extends AppCompatActivity
         switch (view.getId()) {
             case R.id.addDish:
                 intent = new Intent(this, DishActivity.class);
-                onSaveInstanceState(bundleP);
-                intent.putExtras(bundleP);
+                intent.putExtra("IP",URL);
                 startActivityForResult(intent,1);
                 break;
             case R.id.addDrink:
                 intent = new Intent(this, DrinkActivity.class);
-                onSaveInstanceState(bundleP);
-                intent.putExtras(bundleP);
+                intent.putExtra("IP",URL);
                 startActivityForResult(intent,1);
                 break;
         }
@@ -268,21 +303,58 @@ public class MainActivity extends AppCompatActivity
             mail = bundle.getString(StatusContract.Column_User.MAIL);
             name = bundle.getString(StatusContract.Column_User.NAME);
             nameDrawer.setText(name);
-        }
+        }*/
+
         if (requestCode == IMAGE_GALLERY_REQUEST && resultCode == RESULT_OK) {
 
             Bundle b = data.getExtras();
 
             Bitmap selectedImage = b.getParcelable("data");
+            try {
+                user.put("picture",ImageCodeClass.encodeToBase64(selectedImage));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, URLphotoupdate, user, new Response.Listener<JSONObject>() {
 
-            ContentValues changes = new ContentValues();
-            changes.put("picture", ImageCodeClass.encodeToBase64(selectedImage));
-            DbHelper dbHelper = new DbHelper(this);
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        if (Objects.equals(response.getString("msg"), "Update successful")) {
+                            Toast.makeText(getApplicationContext(), response.getString("msg"), Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Can't Register", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    Toast.makeText(getApplicationContext(), "Some error occurred -> " + volleyError, Toast.LENGTH_LONG).show();
+                    volleyError.printStackTrace();
+                }
+            }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    HashMap<String, String> headers = new HashMap<>();
+                    headers.put("Accept", "application/json");
+                    headers.put("Content-Type", "application/json");
+                    return headers;
+                }
 
-            db.update(StatusContract.TABLE_USER, changes, StatusContract.Column_User.STATE + " = 'ACTIVO'", null);
+                @Override
+                public String getBodyContentType() {
+                    return "application/json; charset=utf-8";
+                }
+            };
 
-        }*/
+            RequestQueue rQueue = Volley.newRequestQueue(getApplicationContext());
+            rQueue.add(request);
+        }
+
+
     }
 
     public void onSaveInstanceState(Bundle savedInstanceState) {

@@ -13,14 +13,26 @@ public class User {
 
     @Id
     @Column(unique = true)
+    private int id;
+
+    @Column(unique = true)
     private String user;
 
 
     @NotNull
     private String name, password, mail, state, session;
 
+    @NotNull
     @Column(length = 100000)
     private String picture;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

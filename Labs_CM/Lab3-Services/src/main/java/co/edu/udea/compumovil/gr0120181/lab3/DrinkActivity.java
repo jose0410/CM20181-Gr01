@@ -37,7 +37,7 @@ public class DrinkActivity extends AppCompatActivity implements View.OnClickList
     public static final int IMAGE_GALLERY_REQUEST = 20;
     public static final int EXTRAS_CODE = 1;
 
-    private static String URL = "http://192.168.0.11:8080/api/drink";
+    private static String URL = ":8080/api/drink";
     private ImageView photoDrinkImageView;
     private EditText nameDrinkEditText;
     private Toolbar myToolbar;
@@ -67,9 +67,7 @@ public class DrinkActivity extends AppCompatActivity implements View.OnClickList
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         if(getIntent().getExtras()!=null){
-            Bundle bundle = getIntent().getExtras();
-            /*mail = bundle.getString(StatusContract.Column_User.MAIL);
-            name = bundle.getString(StatusContract.Column_User.NAME);*/
+            URL = getIntent().getStringExtra("IP") + URL;
             Intent intent = new Intent();
             Bundle bundleP = new Bundle();
             onSaveInstanceState(bundleP);

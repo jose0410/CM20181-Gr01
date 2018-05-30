@@ -18,6 +18,9 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+
+import static java.lang.Integer.parseInt;
 
 @RestController
 @RequestMapping("/api")
@@ -27,6 +30,7 @@ public class UserController {
 
     private User user;
     private JSONObject jsonObjectUser;
+    private Random randomGenerator = new Random();
 
     @GetMapping("/allUsers")
     public String allUsersView(Map<String, Object> model) {
@@ -44,6 +48,8 @@ public class UserController {
     public String createUser(@Valid @RequestBody String user) throws JSONException {
         jsonObjectUser = new JSONObject(user);
         this.user = new User();
+
+        this.user.setId(randomGenerator.nextInt(1000000000));
         this.user.setName(jsonObjectUser.getString("name"));
         this.user.setPassword(jsonObjectUser.getString("password"));
         this.user.setMail(jsonObjectUser.getString("email"));
@@ -59,7 +65,7 @@ public class UserController {
 
     @GetMapping("/user/{user}")
     public String getUserById(@PathVariable(value = "user") String user) {
-        User usr = userRepository.findByPk(user);
+        User usr = userRepository.findByUser(user);
         if(usr != null) {
             JSONObject response = new JSONObject();
             try {
@@ -79,26 +85,28 @@ public class UserController {
     }
 
     @PutMapping("/updateuser/{user}")
-    public User updateUser(@PathVariable(value = "user") String user,
-                           @Valid @RequestBody User userDetails) {
+    public String updateUser(@PathVariable(value = "user") String user,
+                           @Valid @RequestBody String details) throws JSONException {
 
-        User userNote = userRepository.findByPk(user);
+        User userNote = userRepository.findByUser(user);
+        JSONObject userDetails = new JSONObject(details);
 
-        userNote.setName(userDetails.getName());
-        userNote.setPassword(userDetails.getPassword());
-        userNote.setMail(userDetails.getMail());
-        userNote.setState(userDetails.getState());
-        userNote.setUser(userDetails.getUser());
-        userNote.setSession(userDetails.getSession());
-        userNote.setPicture(userDetails.getPicture());
+        userNote.setName(userDetails.getString("name"));
+        userNote.setPassword(userDetails.getString("password"));
+        userNote.setMail(userDetails.getString("email"));
+        userNote.setState(userDetails.getString("state"));
+        userNote.setUser(userDetails.getString("user"));
+        userNote.setSession(userDetails.getString("session"));
+        userNote.setPicture(userDetails.getString("picture"));
 
-        User updatedUser = userRepository.save(userNote);
-        return updatedUser;
+        this.userRepository.save(userNote);
+
+        return "{'msg':'Update successful'}";
     }
 
     @DeleteMapping("/deleteuser/{user}")
     public ResponseEntity<?> deleteUser(@PathVariable(value = "user") String user) {
-        User userNote = this.userRepository.findByPk(user);
+        User userNote = this.userRepository.findByUser(user);
 
         this.userRepository.delete(userNote);
 

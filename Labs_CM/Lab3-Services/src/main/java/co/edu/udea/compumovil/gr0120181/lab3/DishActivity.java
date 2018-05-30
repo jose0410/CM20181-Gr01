@@ -42,7 +42,7 @@ public class DishActivity extends AppCompatActivity implements View.OnClickListe
     public static final int IMAGE_GALLERY_REQUEST = 20;
     public static final int EXTRAS_CODE = 1;
 
-    private static String URL = "http://192.168.0.11:8080/api/dish";
+    private static String URL = ":8080/api/dish";
     private ImageView photoImageView;
     private EditText nameDishEditText;
     private EditText priceDishEditText;
@@ -82,6 +82,7 @@ public class DishActivity extends AppCompatActivity implements View.OnClickListe
 
 
         if(getIntent().getExtras()!=null){
+            URL = getIntent().getStringExtra("IP") + URL;
             Bundle bundle = getIntent().getExtras();
             /*mail = bundle.getString(StatusContract.Column_User.MAIL);
             name = bundle.getString(StatusContract.Column_User.NAME);*/

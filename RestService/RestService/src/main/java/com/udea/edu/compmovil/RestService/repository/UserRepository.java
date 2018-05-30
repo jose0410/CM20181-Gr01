@@ -11,5 +11,5 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "SELECT * FROM user WHERE user = ?1 ", nativeQuery = true)
-    User findByPk(String user);
+    User findByUser(String user);
 }
